@@ -1,0 +1,168 @@
+﻿Name,GenBank ID,Field identification,Country,Longitude,Latitude,Population assignment,Population_assignment,Name_V2,Seq_name,SampleID
+A52,SRR8451376,D. abyssinica,Benin,2.4976,10.4767,D. abyssinica,D. abyssinica,A52,RunHi1c-TAG-1,ALL_RunHi1c-TAG-1.bam
+A62,SRR8451375,D. abyssinica,Benin,2.5022,8.4561,D. abyssinica,D. abyssinica,A62,RunHi1c-TAG-10,ALL_RunHi1c-TAG-10.bam
+A67,SRR8451343,D. abyssinica,Benin,1.9786,8.3744,D. abyssinica,D. abyssinica,A67,RunHi1c-TAG-11,ALL_RunHi1c-TAG-11.bam
+A420,SRR8451344,D. abyssinica,Benin,1.8039,7.5203,Hybrid,Western D. praehensilis x D. rotundata,A420,RunHi1c-TAG-12,ALL_RunHi1c-TAG-12.bam
+P424,SRR8451426,D. praehensilis,Benin,1.8156,7.4958,Western D. praehensilis,Western D. praehensilis,P424,RunHi1c-TAG-22,ALL_RunHi1c-TAG-22.bam
+P425,SRR8451427,D. praehensilis,Benin,1.8156,7.4958,Western D. praehensilis,Western D. praehensilis,P425,RunHi1c-TAG-23,ALL_RunHi1c-TAG-23.bam
+P457,SRR8451428,D. praehensilis,Benin,2.1563,6.3882,Western D. praehensilis,Western D. praehensilis,P457,RunHi1c-TAG-24,ALL_RunHi1c-TAG-24.bam
+P462,SRR8451429,D. praehensilis,Benin,2.1563,6.3879,Western D. praehensilis,Western D. praehensilis,P462,RunHi1c-TAG-25,ALL_RunHi1c-TAG-25.bam
+P323,SRR8451435,D. praehensilis,Benin,2.0163,8.3663,Western D. praehensilis,Western D. praehensilis,P323,RunHi1c-TAG-3,ALL_RunHi1c-TAG-3.bam
+P464,SRR8451436,D. praehensilis,Benin,2.1564,6.3878,Western D. praehensilis,Western D. praehensilis,P464,RunHi1c-TAG-32,ALL_RunHi1c-TAG-32.bam
+A467,SRR8451345,D. abyssinica,Benin,2.3159,10.2272,D. abyssinica,D. abyssinica,A467,RunHi1c-TAG-33,ALL_RunHi1c-TAG-33.bam
+A537,SRR8451346,D. abyssinica,Benin,2.3067,10.1826,D. abyssinica,D. abyssinica,A537,RunHi1c-TAG-34,ALL_RunHi1c-TAG-34.bam
+P599,SRR8451411,D. praehensilis,Benin,1.8165,7.497,Hybrid,Western D. praehensilis x D. rotundata,P599,RunHi1c-TAG-35,ALL_RunHi1c-TAG-35.bam
+P624,SRR8451410,D. praehensilis,Benin,1.7976,7.5293,Hybrid,D. abyssinica x  D. rotundata,P624,RunHi1c-TAG-36,ALL_RunHi1c-TAG-36.bam
+CR668,SRR8451373,D. rotundata,Benin,2.3,10.2,D. rotundata,D. rotundata,CR668,RunHi1c-TAG-38,ALL_RunHi1c-TAG-38.bam
+CR685,SRR8451391,D. rotundata,Benin,2.3,10.2,D. rotundata,D. rotundata,CR685,RunHi1c-TAG-39,ALL_RunHi1c-TAG-39.bam
+CR833,SRR8451390,D. rotundata,Benin,1.97,8.37,D. rotundata,D. rotundata,CR833,RunHi1c-TAG-44,ALL_RunHi1c-TAG-44.bam
+CR844,SRR8451393,D. rotundata,Benin,1.75,7.43,D. rotundata,D. rotundata,CR844,RunHi1c-TAG-47,ALL_RunHi1c-TAG-47.bam
+CR694,SRR8451392,D. rotundata,Benin,2.42,10.24,D. rotundata,D. rotundata,CR694,RunHi1c-TAG-5,ALL_RunHi1c-TAG-5.bam
+CR849,SRR8451387,D. rotundata,Benin,2.27,10.4,D. rotundata,D. rotundata,CR849,RunHi1c-TAG-50,ALL_RunHi1c-TAG-50.bam
+CR869,SRR8451386,D. rotundata,Benin,2.52,10.48,D. rotundata,D. rotundata,CR869,RunHi1c-TAG-51,ALL_RunHi1c-TAG-51.bam
+P2990,SRR8451409,D. praehensilis,Benin,2.0344,8.4282,Western D. praehensilis,Western D. praehensilis,P2990,RunHi1c-TAG-52,ALL_RunHi1c-TAG-52.bam
+A3009,SRR8451347,D. abyssinica,Benin,1.505,11.0522,D. abyssinica,D. abyssinica,A3009,RunHi1c-TAG-53,ALL_RunHi1c-TAG-53.bam
+A3085,SRR8451348,D. abyssinica,Benin,2.0157,8.3702,Western D. praehensilis,Western D. praehensilis,PA3085,RunHi1c-TAG-54,ALL_RunHi1c-TAG-54.bam
+CR702,SRR8451389,D. rotundata,Benin,1.7975,7.5292,D. rotundata,D. rotundata,CR702,RunHi1c-TAG-7,ALL_RunHi1c-TAG-7.bam
+CR703,SRR8451388,D. rotundata,Benin,1.7975,7.5292,D. rotundata,D. rotundata,CR703,RunHi1c-TAG-8,ALL_RunHi1c-TAG-8.bam
+A5068,SRR8451349,D. abyssinica,Ghana,-0.8495,10.5182,D. abyssinica,D. abyssinica,A5068,RunHi4c-TAG-100,ALL_RunHi4c-TAG-100.bam
+P4917,SRR8451408,D. praehensilis,Ghana,-0.6157,5.6951,Hybrid,Western D. praehensilis x D. rotundata,P4917,RunHi4c-TAG-39,ALL_RunHi4c-TAG-39.bam
+P4918,SRR8451415,D. praehensilis,Ghana,-0.6647,5.712,Western D. praehensilis,Western D. praehensilis,P4918,RunHi4c-TAG-40,ALL_RunHi4c-TAG-40.bam
+P4919,SRR8451414,D. praehensilis,Ghana,-0.6647,5.7119,Western D. praehensilis,Western D. praehensilis,P4919,RunHi4c-TAG-41,ALL_RunHi4c-TAG-41.bam
+P4920,SRR8451413,D. praehensilis,Ghana,-0.6648,5.712,Western D. praehensilis,Western D. praehensilis,P4920,RunHi4c-TAG-42,ALL_RunHi4c-TAG-42.bam
+P4921,SRR8451412,D. praehensilis,Ghana,-0.6649,5.7118,Western D. praehensilis,Western D. praehensilis,P4921,RunHi4c-TAG-43,ALL_RunHi4c-TAG-43.bam
+P4928,SRR8451407,D. praehensilis,Ghana,-0.3944,6.5386,Western D. praehensilis,Western D. praehensilis,P4928,RunHi4c-TAG-44,ALL_RunHi4c-TAG-44.bam
+P4936,SRR8451406,D. praehensilis,Ghana,-1.0731,6.4729,Hybrid,Western D. praehensilis x D. rotundata,P4936,RunHi4c-TAG-46,ALL_RunHi4c-TAG-46.bam
+P4937,SRR8451359,D. praehensilis,Ghana,-1.0733,6.4727,Hybrid,Western D. praehensilis x D. rotundata,P4937,RunHi4c-TAG-47,ALL_RunHi4c-TAG-47.bam
+CR4952,SRR8451404,D. rotundata,Ghana,-1.3262,7.5412,D. rotundata,D. rotundata,CR4952,RunHi4c-TAG-48,ALL_RunHi4c-TAG-48.bam
+CR4967,SRR8451405,D. rotundata,Ghana,-0.9636,7.8194,D. rotundata,D. rotundata,CR4967,RunHi4c-TAG-49,ALL_RunHi4c-TAG-49.bam
+CR4980,SRR8451425,D. rotundata,Ghana,-1.8371,8.1474,D. rotundata,D. rotundata,CR4980,RunHi4c-TAG-50,ALL_RunHi4c-TAG-50.bam
+CR4987,SRR8451424,D. rotundata,Ghana,-1.8374,8.1481,D. rotundata,D. rotundata,CR4987,RunHi4c-TAG-51,ALL_RunHi4c-TAG-51.bam
+CR4991,SRR8451423,D. rotundata,Ghana,-1.836,8.1471,D. rotundata,D. rotundata,CR4991,RunHi4c-TAG-52,ALL_RunHi4c-TAG-52.bam
+CR5003,SRR8451422,D. rotundata,Ghana,-1.7818,8.1295,D. rotundata,D. rotundata,CR5003,RunHi4c-TAG-54,ALL_RunHi4c-TAG-54.bam
+CR5029,SRR8451421,D. rotundata,Ghana,-0.1862,9.4311,D. rotundata,D. rotundata,CR5029,RunHi4c-TAG-56,ALL_RunHi4c-TAG-56.bam
+CR5031,SRR8451420,D. rotundata,Ghana,-0.1857,9.4312,D. rotundata,D. rotundata,CR5031,RunHi4c-TAG-57,ALL_RunHi4c-TAG-57.bam
+CR5036,SRR8451419,D. rotundata,Ghana,-0.0256,9.4998,Hybrid,D. abyssinica x  D. rotundata,CR5036,RunHi4c-TAG-58,ALL_RunHi4c-TAG-58.bam
+A5045,SRR8451350,D. abyssinica,Ghana,-0.8492,10.5178,D. abyssinica,D. abyssinica,A5045,RunHi4c-TAG-59,ALL_RunHi4c-TAG-59.bam
+A5047,SRR8451351,D. abyssinica,Ghana,-0.8492,10.5179,D. abyssinica,D. abyssinica,A5047,RunHi4c-TAG-60,ALL_RunHi4c-TAG-60.bam
+A5048,SRR8451352,D. abyssinica,Ghana,-0.8492,10.518,D. abyssinica,D. abyssinica,A5048,RunHi4c-TAG-61,ALL_RunHi4c-TAG-61.bam
+A5059,SRR8451320,D. abyssinica,Ghana,-0.8503,10.5187,D. abyssinica,D. abyssinica,A5059,RunHi4c-TAG-62,ALL_RunHi4c-TAG-62.bam
+A5061,SRR8451319,D. abyssinica,Ghana,-0.8502,10.5186,D. abyssinica,D. abyssinica,A5061,RunHi4c-TAG-95,ALL_RunHi4c-TAG-95.bam
+A5066,SRR8451318,D. abyssinica,Ghana,-0.8497,10.5184,D. abyssinica,D. abyssinica,A5066,RunHi4c-TAG-98,ALL_RunHi4c-TAG-98.bam
+A5067,SRR8451317,D. abyssinica,Ghana,-0.8498,10.5184,D. abyssinica,D. abyssinica,A5067,RunHi4c-TAG-99,ALL_RunHi4c-TAG-99.bam
+P5746,SRR8451453,D. praehensilis,Nigeria,5.0327,7.2014,Western D. praehensilis,Western D. praehensilis,P5746,RunHi7c-TAG-102,ALL_RunHi7c-TAG-102.bam
+P5344,SRR8451316,D. praehensilis,Cameroon,13.777,4.5748,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5344,RunHi7c-TAG-11,ALL_RunHi7c-TAG-11.bam
+CR5346,SRR8451360,D. rotundata,Cameroon,13.7696,4.5782,D. rotundata,D. rotundata,CR5346,RunHi7c-TAG-12,ALL_RunHi7c-TAG-12.bam
+CR5348,SRR8451357,D. rotundata,Cameroon,13.7696,4.5782,D. rotundata,D. rotundata,CR5348,RunHi7c-TAG-13,ALL_RunHi7c-TAG-13.bam
+P5350,SRR8451315,D. praehensilis,Cameroon,13.4584,4.564,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5350,RunHi7c-TAG-15,ALL_RunHi7c-TAG-15.bam
+CR5353,SRR8451358,D. rotundata,Cameroon,13.4375,4.5652,D. rotundata,D. rotundata,CR5353,RunHi7c-TAG-16,ALL_RunHi7c-TAG-16.bam
+P5358,SRR8451314,D. praehensilis,Cameroon,13.1684,4.5995,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5358,RunHi7c-TAG-17,ALL_RunHi7c-TAG-17.bam
+P5369,SRR8451313,D. praehensilis,Cameroon,12.4339,4.6547,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5369,RunHi7c-TAG-18,ALL_RunHi7c-TAG-18.bam
+P5378,SRR8451322,D. praehensilis,Cameroon,11.8784,4.4386,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5378,RunHi7c-TAG-19,ALL_RunHi7c-TAG-19.bam
+P5381,SRR8451321,D. praehensilis,Cameroon,11.3784,4.2959,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5381,RunHi7c-TAG-20,ALL_RunHi7c-TAG-20.bam
+CR5387,SRR8451355,D. rotundata,Cameroon,11.5659,4.4568,D. rotundata,D. rotundata,CR5387,RunHi7c-TAG-21,ALL_RunHi7c-TAG-21.bam
+CR5392,SRR8451356,D. rotundata,Cameroon,11.4478,4.5546,D. rotundata,D. rotundata,CR5392,RunHi7c-TAG-22,ALL_RunHi7c-TAG-22.bam
+P5404,SRR8451462,D. praehensilis,Cameroon,11.4542,3.9729,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5404,RunHi7c-TAG-25,ALL_RunHi7c-TAG-25.bam
+P5413,SRR8451463,D. praehensilis,Cameroon,11.4959,3.6324,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5413,RunHi7c-TAG-26,ALL_RunHi7c-TAG-26.bam
+P5417,SRR8451460,D. praehensilis,Cameroon,11.7092,3.4791,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5417,RunHi7c-TAG-27,ALL_RunHi7c-TAG-27.bam
+P5420,SRR8451461,D. praehensilis,Cameroon,11.7924,3.2093,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5420,RunHi7c-TAG-28,ALL_RunHi7c-TAG-28.bam
+P5424,SRR8451466,D. praehensilis,Cameroon,12.1313,2.8125,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5424,RunHi7c-TAG-29,ALL_RunHi7c-TAG-29.bam
+P5427,SRR8451467,D. praehensilis,Cameroon,12.2842,2.8283,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5427,RunHi7c-TAG-30,ALL_RunHi7c-TAG-30.bam
+P5430,SRR8451464,D. praehensilis,Cameroon,11.9048,2.9598,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5430,RunHi7c-TAG-31,ALL_RunHi7c-TAG-31.bam
+P5434,SRR8451465,D. praehensilis,Cameroon,11.6661,3.0235,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5434,RunHi7c-TAG-32,ALL_RunHi7c-TAG-32.bam
+P5438,SRR8451468,D. praehensilis,Cameroon,11.3949,2.9307,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5438,RunHi7c-TAG-33,ALL_RunHi7c-TAG-33.bam
+P5441,SRR8451469,D. praehensilis,Cameroon,10.9794,2.9707,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5441,RunHi7c-TAG-34,ALL_RunHi7c-TAG-34.bam
+P5448,SRR8451449,D. praehensilis,Cameroon,11.4588,3.2964,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5448,RunHi7c-TAG-35,ALL_RunHi7c-TAG-35.bam
+CR5456,SRR8451353,D. rotundata,Cameroon,9.4375,4.3302,D. rotundata,D. rotundata,CR5456,RunHi7c-TAG-37,ALL_RunHi7c-TAG-37.bam
+CR5461,SRR8451354,D. rotundata,Cameroon,9.4326,4.3728,D. rotundata,D. rotundata,CR5461,RunHi7c-TAG-38,ALL_RunHi7c-TAG-38.bam
+CR5462,SRR8451361,D. rotundata,Cameroon,9.4326,4.3728,D. rotundata,D. rotundata,CR5462,RunHi7c-TAG-39,ALL_RunHi7c-TAG-39.bam
+CR5465,SRR8451362,D. rotundata,Cameroon,9.6083,4.2312,D. rotundata,D. rotundata,CR5465,RunHi7c-TAG-40,ALL_RunHi7c-TAG-40.bam
+CR5467,SRR8451328,D. rotundata,Cameroon,9.6857,4.333,Western D. praehensilis,Western D. praehensilis,PCR5467,RunHi7c-TAG-41,ALL_RunHi7c-TAG-41.bam
+P5472,SRR8451448,D. praehensilis,Cameroon,9.591,4.3443,Western D. praehensilis,Western D. praehensilis,P5472,RunHi7c-TAG-42,ALL_RunHi7c-TAG-42.bam
+CR5478,SRR8451327,D. rotundata,Cameroon,9.534,4.3821,D. rotundata,D. rotundata,CR5478,RunHi7c-TAG-43,ALL_RunHi7c-TAG-43.bam
+P5483,SRR8451451,D. praehensilis,Cameroon,9.5667,4.5044,Western D. praehensilis,Western D. praehensilis,P5483,RunHi7c-TAG-45,ALL_RunHi7c-TAG-45.bam
+CR5489,SRR8451330,D. rotundata,Cameroon,9.5546,4.3666,D. rotundata,D. rotundata,CR5489,RunHi7c-TAG-47,ALL_RunHi7c-TAG-47.bam
+A5497,SRR8451370,D. abyssinica,Cameroon,13.6743,9.9533,Hybrid,Cameroonian D. praehensilis x D. abyssinica,A5497,RunHi7c-TAG-50,ALL_RunHi7c-TAG-50.bam
+A5498,SRR8451369,D. abyssinica,Cameroon,13.6742,9.9533,Hybrid,Cameroonian D. praehensilis x D. abyssinica,A5498,RunHi7c-TAG-51,ALL_RunHi7c-TAG-51.bam
+A5499,SRR8451368,D. abyssinica,Cameroon,13.6742,9.9533,Hybrid,Cameroonian D. praehensilis x D. abyssinica,A5499,RunHi7c-TAG-52,ALL_RunHi7c-TAG-52.bam
+CR5517,SRR8451331,D. rotundata,Nigeria,6.8906,5.8845,D. rotundata,D. rotundata,CR5517,RunHi7c-TAG-55,ALL_RunHi7c-TAG-55.bam
+CR5522,SRR8451309,D. rotundata,Nigeria,5.5025,6.4708,D. rotundata,D. rotundata,CR5522,RunHi7c-TAG-56,ALL_RunHi7c-TAG-56.bam
+CR5523,SRR8451310,D. rotundata,Nigeria,5.7706,6.4145,D. rotundata,D. rotundata,CR5523,RunHi7c-TAG-57,ALL_RunHi7c-TAG-57.bam
+CR5543,SRR8451311,D. rotundata,Nigeria,3.5414,8.0797,D. rotundata,D. rotundata,CR5543,RunHi7c-TAG-59,ALL_RunHi7c-TAG-59.bam
+CR5546,SRR8451312,D. rotundata,Nigeria,4.927,7.8466,D. rotundata,D. rotundata,CR5546,RunHi7c-TAG-60,ALL_RunHi7c-TAG-60.bam
+CR5553,SRR8451305,D. rotundata,Nigeria,6.7558,7.8474,D. rotundata,D. rotundata,CR5553,RunHi7c-TAG-61,ALL_RunHi7c-TAG-61.bam
+CR5574,SRR8451306,D. rotundata,Nigeria,7.0545,9.2584,D. rotundata,D. rotundata,CR5574,RunHi7c-TAG-62,ALL_RunHi7c-TAG-62.bam
+CR5602,SRR8451307,D. rotundata,Nigeria,8.4114,8.8999,D. rotundata,D. rotundata,CR5602,RunHi7c-TAG-64,ALL_RunHi7c-TAG-64.bam
+CR5615,SRR8451308,D. rotundata,Nigeria,8.8159,7.2938,D. rotundata,D. rotundata,CR5615,RunHi7c-TAG-65,ALL_RunHi7c-TAG-65.bam
+CR5639,SRR8451303,D. rotundata,Nigeria,7.4898,6.0284,D. rotundata,D. rotundata,CR5639,RunHi7c-TAG-66,ALL_RunHi7c-TAG-66.bam
+CR5663,SRR8451304,D. rotundata,Nigeria,7.7837,7.158,D. rotundata,D. rotundata,CR5663,RunHi7c-TAG-68,ALL_RunHi7c-TAG-68.bam
+CR5682,SRR8451338,D. rotundata,Nigeria,9.7155,7.5357,D. rotundata,D. rotundata,CR5682,RunHi7c-TAG-69,ALL_RunHi7c-TAG-69.bam
+A5689,SRR8451439,D. abyssinica,Nigeria,7.4571,9.7999,D. abyssinica,D. abyssinica,A5689,RunHi7c-TAG-70,ALL_RunHi7c-TAG-70.bam
+A5690,SRR8451438,D. abyssinica,Nigeria,7.3145,9.3865,D. abyssinica,D. abyssinica,A5690,RunHi7c-TAG-71,ALL_RunHi7c-TAG-71.bam
+A5691,SRR8451437,D. abyssinica,Nigeria,7.1664,9.2669,D. abyssinica,D. abyssinica,A5691,RunHi7c-TAG-72,ALL_RunHi7c-TAG-72.bam
+A5693,SRR8451434,D. abyssinica,Nigeria,7.5118,10.728,D. abyssinica,D. abyssinica,A5693,RunHi7c-TAG-74,ALL_RunHi7c-TAG-74.bam
+A5694,SRR8451371,D. abyssinica,Nigeria,7.6447,10.9325,D. abyssinica,D. abyssinica,A5694,RunHi7c-TAG-75,ALL_RunHi7c-TAG-75.bam
+A5695,SRR8451459,D. abyssinica,Nigeria,7.5162,10.7517,D. abyssinica,D. abyssinica,A5695,RunHi7c-TAG-76,ALL_RunHi7c-TAG-76.bam
+A5696,SRR8451458,D. abyssinica,Nigeria,7.6562,10.9964,D. abyssinica,D. abyssinica,A5696,RunHi7c-TAG-77,ALL_RunHi7c-TAG-77.bam
+A5697,SRR8451382,D. abyssinica,Nigeria,7.5518,10.4396,D. abyssinica,D. abyssinica,A5697,RunHi7c-TAG-78,ALL_RunHi7c-TAG-78.bam
+P5318,SRR8451450,D. praehensilis,Cameroon,13.3341,3.8207,Cameroonian D. praehensilis,Cameroonian D. praehensilis,P5318,RunHi7c-TAG-8,ALL_RunHi7c-TAG-8.bam
+A5699,SRR8451381,D. abyssinica,Nigeria,7.9716,9.4407,D. abyssinica,D. abyssinica,A5699,RunHi7c-TAG-80,ALL_RunHi7c-TAG-80.bam
+A5700,SRR8451384,D. abyssinica,Nigeria,7.9672,9.8289,D. abyssinica,D. abyssinica,A5700,RunHi7c-TAG-81,ALL_RunHi7c-TAG-81.bam
+A5701,SRR8451383,D. abyssinica,Nigeria,7.8832,8.9079,D. abyssinica,D. abyssinica,A5701,RunHi7c-TAG-82,ALL_RunHi7c-TAG-82.bam
+A5702,SRR8451378,D. abyssinica,Nigeria,7.9481,9.1434,D. abyssinica,D. abyssinica,A5702,RunHi7c-TAG-83,ALL_RunHi7c-TAG-83.bam
+A5703,SRR8451377,D. abyssinica,Nigeria,7.7096,10.3385,D. abyssinica,D. abyssinica,A5703,RunHi7c-TAG-84,ALL_RunHi7c-TAG-84.bam
+A5704,SRR8451380,D. abyssinica,Nigeria,7.9869,9.9737,D. abyssinica,D. abyssinica,A5704,RunHi7c-TAG-85,ALL_RunHi7c-TAG-85.bam
+A5705,SRR8451379,D. abyssinica,Nigeria,8.4324,8.8712,D. abyssinica,D. abyssinica,A5705,RunHi7c-TAG-86,ALL_RunHi7c-TAG-86.bam
+P5708,SRR8451452,D. praehensilis,Nigeria,3.6809,7.8572,Western D. praehensilis,Western D. praehensilis,P5708,RunHi7c-TAG-87,ALL_RunHi7c-TAG-87.bam
+P5710,SRR8451455,D. praehensilis,Nigeria,4.927,7.8466,Western D. praehensilis,Western D. praehensilis,P5710,RunHi7c-TAG-89,ALL_RunHi7c-TAG-89.bam
+P5713,SRR8451454,D. praehensilis,Nigeria,4.351,7.5911,Western D. praehensilis,Western D. praehensilis,P5713,RunHi7c-TAG-90,ALL_RunHi7c-TAG-90.bam
+P5716,SRR8451457,D. praehensilis,Nigeria,6.7866,8.0686,Western D. praehensilis,Western D. praehensilis,P5716,RunHi7c-TAG-91,ALL_RunHi7c-TAG-91.bam
+P5717,SRR8451456,D. praehensilis,Nigeria,6.9858,8.4476,Hybrid,D. abyssinica x  D. rotundata,P5717,RunHi7c-TAG-92,ALL_RunHi7c-TAG-92.bam
+P5720,SRR8451430,D. praehensilis,Nigeria,6.0319,7.8253,Western D. praehensilis,Western D. praehensilis,P5720,RunHi7c-TAG-93,ALL_RunHi7c-TAG-93.bam
+P5723,SRR8451431,D. praehensilis,Nigeria,7.4745,5.8427,Western D. praehensilis,Western D. praehensilis,P5723,RunHi7c-TAG-94,ALL_RunHi7c-TAG-94.bam
+P5728,SRR8451432,D. praehensilis,Nigeria,7.7837,7.158,Western D. praehensilis,Western D. praehensilis,P5728,RunHi7c-TAG-96,ALL_RunHi7c-TAG-96.bam
+P5729,SRR8451433,D. praehensilis,Nigeria,7.3775,6.6534,Western D. praehensilis,Western D. praehensilis,P5729,RunHi7c-TAG-97,ALL_RunHi7c-TAG-97.bam
+CR4963,SRR8451418,D. rotundata,Ghana,-0.9657,7.79,D. rotundata,D. rotundata,CR4963,RunHi8c-TAG-10,ALL_RunHi8c-TAG-10.bam
+CR4965,SRR8451417,D. rotundata,Ghana,-0.9743,7.807,D. rotundata,D. rotundata,CR4965,RunHi8c-TAG-11,ALL_RunHi8c-TAG-11.bam
+CR4969,SRR8451416,D. rotundata,Ghana,-0.9636,7.8194,D. rotundata,D. rotundata,CR4969,RunHi8c-TAG-12,ALL_RunHi8c-TAG-12.bam
+CR4990,SRR8451443,D. rotundata,Ghana,-1.8374,8.1481,D. rotundata,D. rotundata,CR4990,RunHi8c-TAG-13,ALL_RunHi8c-TAG-13.bam
+CR5005,SRR8451444,D. rotundata,Ghana,-1.7824,8.1297,D. rotundata,D. rotundata,CR5005,RunHi8c-TAG-14,ALL_RunHi8c-TAG-14.bam
+CR5014,SRR8451441,D. rotundata,Ghana,-0.3372,9.4227,D. rotundata,D. rotundata,CR5014,RunHi8c-TAG-15,ALL_RunHi8c-TAG-15.bam
+CR5018,SRR8451442,D. rotundata,Ghana,-0.3299,9.4187,D. rotundata,D. rotundata,CR5018,RunHi8c-TAG-16,ALL_RunHi8c-TAG-16.bam
+CR5097,SRR8451337,D. rotundata,Nigeria,5.05,7.3833,D. rotundata,D. rotundata,CR5097,RunHi8c-TAG-17,ALL_RunHi8c-TAG-17.bam
+CR5099,SRR8451336,D. rotundata,Nigeria,9.5,8.2,D. rotundata,D. rotundata,CR5099,RunHi8c-TAG-18,ALL_RunHi8c-TAG-18.bam
+CR5111,SRR8451335,D. rotundata,Nigeria,8.3,9.42,Hybrid,D. abyssinica x  D. rotundata,CR5111,RunHi8c-TAG-19,ALL_RunHi8c-TAG-19.bam
+CR5118,SRR8451395,D. rotundata,Benin,1.53,9.42,D. rotundata,D. rotundata,CR5118,RunHi8c-TAG-22,ALL_RunHi8c-TAG-22.bam
+CR5120,SRR8451342,D. rotundata,Nigeria,8.8551,9.81,D. rotundata,D. rotundata,CR5120,RunHi8c-TAG-23,ALL_RunHi8c-TAG-23.bam
+CR5345,SRR8451329,D. rotundata,Cameroon,13.7696,4.5782,D. rotundata,D. rotundata,CR5345,RunHi8c-TAG-24,ALL_RunHi8c-TAG-24.bam
+CR5390,SRR8451324,D. rotundata,Cameroon,11.4854,4.4826,D. rotundata,D. rotundata,CR5390,RunHi8c-TAG-25,ALL_RunHi8c-TAG-25.bam
+CR5457,SRR8451323,D. rotundata,Cameroon,9.4375,4.3302,D. rotundata,D. rotundata,CR5457,RunHi8c-TAG-26,ALL_RunHi8c-TAG-26.bam
+CR5458,SRR8451326,D. rotundata,Cameroon,9.4404,4.3253,D. rotundata,D. rotundata,CR5458,RunHi8c-TAG-27,ALL_RunHi8c-TAG-27.bam
+CR5468,SRR8451325,D. rotundata,Cameroon,9.6857,4.333,Western D. praehensilis,Western D. praehensilis,PCR5468,RunHi8c-TAG-28,ALL_RunHi8c-TAG-28.bam
+CR5477,SRR8451332,D. rotundata,Cameroon,9.534,4.3821,D. rotundata,D. rotundata,CR5477,RunHi8c-TAG-29,ALL_RunHi8c-TAG-29.bam
+CR5525,SRR8451341,D. rotundata,Nigeria,5.769,6.4128,D. rotundata,D. rotundata,CR5525,RunHi8c-TAG-31,ALL_RunHi8c-TAG-31.bam
+CR5526,SRR8451340,D. rotundata,Nigeria,4.9072,7.1538,Hybrid,Western D. praehensilis x D. rotundata,CR5526,RunHi8c-TAG-32,ALL_RunHi8c-TAG-32.bam
+CR5527,SRR8451339,D. rotundata,Nigeria,5.5469,7.2219,D. rotundata,D. rotundata,CR5527,RunHi8c-TAG-33,ALL_RunHi8c-TAG-33.bam
+CR5533,SRR8451334,D. rotundata,Nigeria,3.539,8.0751,D. rotundata,D. rotundata,CR5533,RunHi8c-TAG-34,ALL_RunHi8c-TAG-34.bam
+CR5537,SRR8451333,D. rotundata,Nigeria,3.6283,8.7605,D. rotundata,D. rotundata,CR5537,RunHi8c-TAG-35,ALL_RunHi8c-TAG-35.bam
+CR5540,SRR8451374,D. rotundata,Nigeria,3.5414,8.0797,D. rotundata,D. rotundata,CR5540,RunHi8c-TAG-36,ALL_RunHi8c-TAG-36.bam
+CR5555,SRR8451385,D. rotundata,Nigeria,6.4843,7.7278,D. rotundata,D. rotundata,CR5555,RunHi8c-TAG-38,ALL_RunHi8c-TAG-38.bam
+CR5558,SRR8451367,D. rotundata,Nigeria,5.739,7.7685,D. rotundata,D. rotundata,CR5558,RunHi8c-TAG-39,ALL_RunHi8c-TAG-39.bam
+CR5565,SRR8451440,D. rotundata,Nigeria,5.419,7.8038,D. rotundata,D. rotundata,CR5565,RunHi8c-TAG-40,ALL_RunHi8c-TAG-40.bam
+CR5567,SRR8451365,D. rotundata,Nigeria,6.0466,7.8254,D. rotundata,D. rotundata,CR5567,RunHi8c-TAG-41,ALL_RunHi8c-TAG-41.bam
+CR5573,SRR8451366,D. rotundata,Nigeria,7.0545,9.2584,D. rotundata,D. rotundata,CR5573,RunHi8c-TAG-42,ALL_RunHi8c-TAG-42.bam
+CR5583,SRR8451363,D. rotundata,Nigeria,7.8799,8.9086,D. rotundata,D. rotundata,CR5583,RunHi8c-TAG-43,ALL_RunHi8c-TAG-43.bam
+CR5591,SRR8451364,D. rotundata,Nigeria,7.7096,10.3302,D. rotundata,D. rotundata,CR5591,RunHi8c-TAG-44,ALL_RunHi8c-TAG-44.bam
+CR5599,SRR8451372,D. rotundata,Nigeria,8.5748,8.3444,D. rotundata,D. rotundata,CR5599,RunHi8c-TAG-45,ALL_RunHi8c-TAG-45.bam
+CR629,SRR8451394,D. rotundata,Benin,2.3,10.2,D. rotundata,D. rotundata,CR629,RunHi8c-TAG-46,ALL_RunHi8c-TAG-46.bam
+CR837,SRR8451396,D. rotundata,Benin,1.74,7.24,D. rotundata,D. rotundata,CR837,RunHi8c-TAG-47,ALL_RunHi8c-TAG-47.bam
+CR3586,SRR8451397,D. rotundata,Benin,2.3072,10.2675,D. rotundata,D. rotundata,CR3586,RunHi8c-TAG-48,ALL_RunHi8c-TAG-48.bam
+CR3725,SRR8451398,D. rotundata,Benin,2.3081,10.2297,D. rotundata,D. rotundata,CR3725,RunHi8c-TAG-49,ALL_RunHi8c-TAG-49.bam
+CR4003,SRR8451399,D. rotundata,Benin,2.3072,10.2675,D. rotundata,D. rotundata,CR4003,RunHi8c-TAG-50,ALL_RunHi8c-TAG-50.bam
+CR4229,SRR8451400,D. rotundata,Benin,2.3139,10.2756,D. rotundata,D. rotundata,CR4229,RunHi8c-TAG-51,ALL_RunHi8c-TAG-51.bam
+CR4275,SRR8451401,D. rotundata,Benin,2.3106,10.2569,D. rotundata,D. rotundata,CR4275,RunHi8c-TAG-52,ALL_RunHi8c-TAG-52.bam
+CR4583,SRR8451402,D. rotundata,Benin,2.3072,10.2675,D. rotundata,D. rotundata,CR4583,RunHi8c-TAG-53,ALL_RunHi8c-TAG-53.bam
+CR4818,SRR8451403,D. rotundata,Benin,2.3286,10.2433,D. rotundata,D. rotundata,CR4818,RunHi8c-TAG-54,ALL_RunHi8c-TAG-54.bam
+CR4923,SRR8451446,D. rotundata,Ghana,-0.3705,6.5427,Hybrid,Western D. praehensilis x D. rotundata,CR4923,RunHi8c-TAG-7,ALL_RunHi8c-TAG-7.bam
+CR4941,SRR8451447,D. rotundata,Ghana,-1.2587,6.9427,D. rotundata,D. rotundata,CR4941,RunHi8c-TAG-8,ALL_RunHi8c-TAG-8.bam
+CR4950,SRR8451445,D. rotundata,Ghana,-1.3263,7.5408,D. rotundata,D. rotundata,CR4950,RunHi8c-TAG-9,ALL_RunHi8c-TAG-9.bam
