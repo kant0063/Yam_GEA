@@ -1,11 +1,11 @@
 ################################################################################
-# 15_LD_decay.R                                            Fig. S12; window sizes
-# No original script was uploaded for Fig. S12. Recomputes LD decay (r^2 between SNP
+# 15_LD_decay.R                                            Fig. S8; window sizes
+# No original script was uploaded for Fig. S8. Recomputes LD decay (r^2 between SNP
 # pairs <= CFG$ld_max_dist apart) for the full panel and within D. rotundata, fits
 # r2 = c + a*exp(-b*d), and reports the half-decay distance (d where r2 falls halfway
 # from its initial value to background) and the distance to r2 = 0.2 (NA if r2 never
 # reaches 0.2 - this resolves the Methods/caption inconsistency).
-# Outputs: FigS12_LD_decay.png, LD_decay_summary.csv (used for gene / WZA windows).
+# Outputs: FigS8_LD_decay.png, LD_decay_summary.csv (used for gene / WZA windows).
 ################################################################################
 source("00_config_and_helpers.R")
 # LD needs dense markers: use the relaxed (imputed, 1.57 M SNP) master if it exists, else the strict one
@@ -42,4 +42,4 @@ for (s in c("full", "rotundata")) {
 summ <- bind_rows(summ); write.csv(summ, tab("LD_decay_summary.csv"), row.names = FALSE); print(summ)
 pp <- ggplot(bind_rows(plots), aes(d / 1000, r2, colour = set)) + geom_point(size = 1) + geom_line(aes(y = fit), na.rm = TRUE) +
   scale_x_log10() + labs(x = "Distance (kb, log scale)", y = expression(Mean~r^2)) + theme_bw()
-ggsave(fig("FigS12_LD_decay.png"), pp, width = 6, height = 4, dpi = 300)
+ggsave(fig("FigS8_LD_decay.png"), pp, width = 6, height = 4, dpi = 300)

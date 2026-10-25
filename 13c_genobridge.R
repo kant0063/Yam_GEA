@@ -9,7 +9,7 @@
 # Step 1 (here, any OS):  Rscript 13c_genobridge.R      -> writes the input files + commands
 # Step 2 (Linux / HPC / Docker): run the printed genobridge-predict command
 # Step 3 (here):          Rscript 13c_genobridge.R      -> detects the results and writes
-#                         TableS14c_GenoBridge.csv (compared with Fig. S14 random CV)
+#                         TableS19_GenoBridge.csv (compared with Fig. S9 random CV)
 ################################################################################
 source("00_config_and_helpers.R"); M <- load_master()
 gbdir <- res("genobridge"); dir.create(gbdir, showWarnings = FALSE)
@@ -41,14 +41,14 @@ if (file.exists(rf)) {
   if (any(is.na(c(col_tr, col_r)))) stop("Could not find trait / best-r columns - check the column names printed above")
   gbt <- data.frame(trait = gb[[col_tr]], GenoBridge_r = as.numeric(gb[[col_r]]),
                     GenoBridge_model = if (!is.na(col_m)) gb[[col_m]] else NA)
-  acc <- read.csv(tab("FigS14_prediction_accuracy.csv"))
+  acc <- read.csv(tab("FigS9_prediction_accuracy.csv"))
   ours <- acc %>% filter(scheme == "random 10-fold") %>% group_by(trait) %>%
     summarise(best_ours_r = max(r_pooled[model != "baseline"], na.rm = TRUE),
               best_ours_model = model[model != "baseline"][which.max(r_pooled[model != "baseline"])],
               baseline_r = r_pooled[model == "baseline"][1], .groups = "drop")
   tabc <- left_join(gbt, ours, by = "trait") %>% mutate(diff_vs_ours = GenoBridge_r - best_ours_r,
                                                        gain_over_baseline = GenoBridge_r - baseline_r)
-  write.csv(tabc, tab("TableS14c_GenoBridge.csv"), row.names = FALSE)
+  write.csv(tabc, tab("TableS19_GenoBridge.csv"), row.names = FALSE)
   print(tabc %>% summarise(n = n(), GenoBridge_mean_r = mean(GenoBridge_r, na.rm = TRUE),
                            ours_mean_r = mean(best_ours_r, na.rm = TRUE), mean_diff = mean(diff_vs_ours, na.rm = TRUE),
                            mean_gain_over_baseline = mean(gain_over_baseline, na.rm = TRUE)))

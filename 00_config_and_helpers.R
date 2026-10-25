@@ -25,7 +25,7 @@ CFG <- list(
   vcf_relaxed   = "Yam_relaxed_imputed.vcf.gz",          # created by 03
   meta_csv      = "Yam_meta_data.csv",                   # SampleID, Population.assignment
   env_csv       = "Yam_bioclim_data_extracted_V3.csv",   # SampleID, lat, lon, 19 bio + 17 soil
-  accession_csv = "Yam_accession_info.csv",              # OPTIONAL: SampleID, Field_species, Country (from Table S6)
+  accession_csv = "Yam_accession_info.csv",              # OPTIONAL: SampleID, Field_species, Country (from the original Table S6, accession list)
   qmatrix_csv   = "tess3_qmatrix_K7.csv",                # written by Yam_spatial_population_structure.R
   koppen_hist   = "koppen_geiger_tif/1991_2020/koppen_geiger_0p00833333.tif",
   koppen_fut    = "koppen_geiger_tif/2071_2099/ssp585/koppen_geiger_0p00833333.tif",
@@ -61,7 +61,7 @@ CFG <- list(
   gcms          = c("ACCESS-ESM1-5","BCC-CSM2-MR","CanESM5","CNRM-CM6-1","IPSL-CM6A-LR","MIROC6"),
   clim_res      = 10,     # arc-minutes
   map_buffer    = 3,      # degrees around sampled extent
-  core_csv      = "Yam_core_collection.csv",  # original 50-accession core (column SampleID); else Table S3 from 13
+  core_csv      = "Yam_core_collection.csv",  # original 50-accession core (column SampleID); else Table S14 from 13
   core_reps     = 50,     # random size-matched training sets compared with the core
   cv_k          = 10,
   cv_reps       = 5,
@@ -129,7 +129,7 @@ subsets <- function(M) {
 }
 # world outline layer: polygons from maps::map_data("world") drawn with geom_path.
 # Works with every ggplot2 version (borders()/annotation_borders() changed in ggplot2 4.0 and
-# failed inside faceted maps, which produced a blank Fig. S13).
+# failed inside faceted maps, which produced a blank Fig. S17).
 world_borders <- function(xlim = NULL, ylim = NULL, colour = "grey50", linewidth = 0.3, ...) {
   need("maps"); w <- ggplot2::map_data("world")
   if (!is.null(xlim)) w <- w[w$group %in% unique(w$group[w$long >= xlim[1] - 5 & w$long <= xlim[2] + 5]), ]
@@ -253,10 +253,10 @@ exdet <- function(ref, new) {
 
 
 # ============================== FIGURE HELPERS ================================
-# Fig. S15: within-group GEAV heatmap. Rows labelled with accession names (candidate parents
+# Fig. S10: within-group GEAV heatmap. Rows labelled with accession names (candidate parents
 # marked with *), ordered within each group by the first within-group genetic PC; a side bar
 # shows k-means sub-clusters (k = 2) on within-group PCs, so residual structure inside a group
-# (e.g. two D. abyssinica sub-groups) is visible and quantified (Table S6b).
+# (e.g. two D. abyssinica sub-groups) is visible and quantified (Table S16b).
 plot_geav_heatmap <- function(out, M, cand_ids = character(0), cap = 3) {
   meta <- M$meta
   namecol <- intersect(c("Name", "Name.x", "Accession", "Accession_name"), names(meta))
@@ -355,7 +355,7 @@ load_panel <- function(name, script = "") {
 }
 
 
-# Fig. S10 panels from saved EGWAS p-values: Manhattan by pseudomolecule + QQ (same style as script 07)
+# Fig. S6 panels from saved EGWAS p-values: Manhattan by pseudomolecule + QQ (same style as script 07)
 egwas_manhattan_qq <- function(Ptr, snp) {
   d <- Ptr[is.finite(Ptr$p) & Ptr$p > 0, ]
   d <- merge(d, snp[, c("SNP", "CHROM", "POS")], by = "SNP")

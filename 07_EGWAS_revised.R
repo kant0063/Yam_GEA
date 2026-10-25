@@ -11,14 +11,14 @@
 #   - ICs (icaimax, 3 components on the 19 bioclim variables) computed and saved here
 # v2: covariate matrix made full rank in emmax_scan (constant lineage covariate no
 #     longer stops the run); sets smaller than CFG$min_n_within are skipped with a
-#     report; NA p-values (monomorphic SNPs) removed before FDR; Fig. S10 with
+#     report; NA p-values (monomorphic SNPs) removed before FDR; Fig. S6 with
 #     chromosome axis, any number of contigs, and QQ plots.
 # v3: responses rank-inverse-normal transformed (CFG$int_transform); REML bounded
-#     (CFG$min_ve_ratio); PVE = t^2/(t^2+df) (bounded); 'boundary' flag in Table S4b.
-# Outputs: Table S2 (IC loadings), Table S4 (+ S4b lambda/counts), EGWAS summary,
-#          per-SNP p-values for WZA (08), Fig. S10.
+#     (CFG$min_ve_ratio); PVE = t^2/(t^2+df) (bounded); 'boundary' flag in Table S7.
+# Outputs: Table S5 (IC loadings), Table S18 (+ S4b lambda/counts), EGWAS summary,
+#          per-SNP p-values for WZA (08), Fig. S6.
 ################################################################################
-RUN_SCAN <- TRUE    # set FALSE to redraw Fig. S10 from saved p-values only
+RUN_SCAN <- TRUE    # set FALSE to redraw Fig. S6 from saved p-values only
 source("00_config_and_helpers.R"); need(c("rrBLUP", "ica")); M <- load_master(); meta <- M$meta
 
 # ---- traits: all env variables + IC1-3 ---------------------------------------
@@ -27,7 +27,7 @@ if (RUN_SCAN || !file.exists(ic_file)) {
   bio <- grep("^bio", colnames(M$E), ignore.case = TRUE, value = TRUE)
   ic <- ica::icaimax(scale(M$E[, bio]), nc = 3, center = TRUE)
   IC <- ic$S; colnames(IC) <- paste0("IC", 1:3); rownames(IC) <- rownames(M$E)
-  write.csv(round(cor(M$E[, bio], IC), 3), tab("TableS2_IC_loadings.csv"))
+  write.csv(round(cor(M$E[, bio], IC), 3), tab("TableS5_IC_loadings.csv"))
   saveRDS(IC, ic_file)
 } else IC <- readRDS(ic_file)
 Y <- cbind(M$E, IC)
@@ -78,8 +78,8 @@ if (nrow(hits)) {
                           PVE = numeric(), q = numeric(), trait = character(), set = character(),
                           CHROM = character(), POS = numeric(), beta_original_units = numeric())
 lam <- bind_rows(lam)
-write.csv(hits, tab("TableS4_EGWAS_significant_with_effects.csv"), row.names = FALSE)
-write.csv(lam, tab("TableS4b_lambda_and_counts.csv"), row.names = FALSE)
+write.csv(hits, tab("TableS18_EGWAS_significant_with_effects.csv"), row.names = FALSE)
+write.csv(lam, tab("TableS7_lambda_and_counts.csv"), row.names = FALSE)
 
 # ---- summaries used in the Results ------------------------------------------
 summ <- hits %>% group_by(set) %>% summarise(associations = n(), unique_markers = n_distinct(SNP),
@@ -94,7 +94,7 @@ if (length(full_m)) {
 }
 }
 
-# ---- Fig. S10: Manhattan + QQ for IC1-3 (full panel) --------------------------
+# ---- Fig. S6: Manhattan + QQ for IC1-3 (full panel) --------------------------
 pf <- res("egwas_pvalues_full.rds")
 if (file.exists(pf)) {
   P <- readRDS(pf)
@@ -115,12 +115,13 @@ if (file.exists(pf)) {
     qq <- data.frame(exp = -log10(ppoints(nrow(d))), obs = -log10(sort(d$p)))
     pq <- ggplot(qq, aes(exp, obs)) + geom_point(size = .5) + geom_abline(slope = 1, intercept = 0, colour = "red") +
       labs(title = NULL, x = expression(Expected~-log[10](p)), y = expression(Observed~-log[10](p))) + theme_bw()
+    save_panel(pm, paste0("FigS6_", tr, "_manhattan")); save_panel(pq, paste0("FigS6_", tr, "_qq"))
     if (requireNamespace("patchwork", quietly = TRUE)) {
-      ggsave(fig(paste0("FigS10_", tr, ".png")), patchwork::wrap_plots(pm, pq, widths = c(3, 1)) + patchwork::plot_annotation(tag_levels = "A"), width = 14, height = 3.8, dpi = 300)
+      ggsave(fig(paste0("FigS6_", tr, ".png")), patchwork::wrap_plots(pm, pq, widths = c(3, 1)) + patchwork::plot_annotation(tag_levels = "A"), width = 14, height = 3.8, dpi = 300)
     } else {
-      ggsave(fig(paste0("FigS10_manhattan_", tr, ".png")), pm, width = 11, height = 3.5, dpi = 300)
-      ggsave(fig(paste0("FigS10_qq_", tr, ".png")), pq, width = 4, height = 4, dpi = 300)
+      ggsave(fig(paste0("FigS6_manhattan_", tr, ".png")), pm, width = 11, height = 3.5, dpi = 300)
+      ggsave(fig(paste0("FigS6_qq_", tr, ".png")), pq, width = 4, height = 4, dpi = 300)
     }
   }
-  write.csv(data.frame(chromosome_label = seq_len(nrow(ax)), contig = ax$CHROM), tab("FigS10_chromosome_labels.csv"), row.names = FALSE)
+  write.csv(data.frame(chromosome_label = seq_len(nrow(ax)), contig = ax$CHROM), tab("FigS6_chromosome_labels.csv"), row.names = FALSE)
 } else msg("No full-panel p-values found - run with RUN_SCAN <- TRUE")

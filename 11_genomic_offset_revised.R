@@ -3,7 +3,7 @@
 # REPLACES General_genetic_offset_script_with_regional_plots.R and panel B of
 # Combined_RDA_GenomicOffset_Figure.R.
 # Problems found in the originals (each fixed here):
-#   1. Fig. 4B was the GRAND MEAN over SSP245 + SSP585 and 2041-2060 + 2081-2100,
+#   1. Fig. 3B was the GRAND MEAN over SSP245 + SSP585 and 2041-2060 + 2081-2100,
 #      although labelled SSP585 2081-2100 -> now one scenario/period (CFG$ssp, CFG$period).
 #   2. Missing (ocean) climate values were mean-imputed, so ocean cells received
 #      offsets -> NA cells are kept NA and masked.
@@ -16,7 +16,7 @@
 #      (ExDet NT1 < 0 or NT2 > 1) are masked; the share of cells with non-analog FUTURE climate
 #      is reported (v2: masking on future novelty greyed out the entire map).
 #   5. Colour scale: single sequential palette, low -> high stated in the legend.
-# Outputs: Fig. 4B, per-GCM SD map, per-accession offsets (Table S6 columns),
+# Outputs: Fig. 3B, per-GCM SD map, per-accession offsets (Table S13 columns),
 #          within-species offsets.
 ################################################################################
 source("00_config_and_helpers.R"); need(c("LEA", "terra", "geodata")); library(terra)
@@ -61,7 +61,7 @@ novel <- !exdet(E_train, E_now_grid)$analog      # mask: CURRENT climate outside
 msg("Land cells with non-analog FUTURE climate (any GCM):", round(100 * mean(fut_novel), 1), "%")
 write.csv(data.frame(land_cells = length(cells), current_nonanalog_pct = 100 * mean(novel), future_nonanalog_pct = 100 * mean(fut_novel)),
           tab("offset_extrapolation_summary.csv"), row.names = FALSE)
-# climate at sampling sites, current and future (GCM mean) -> Fig. S16 (script 17)
+# climate at sampling sites, current and future (GCM mean) -> Fig. S18 (script 17)
 saveRDS(list(now = E_train, fut = Reduce(`+`, fut_sites) / length(fut_sites), group = meta$Population.assignment),
         res("climate_at_sites.rds"))
 off_mean <- rowMeans(do.call(cbind, grid_off), na.rm = TRUE); off_sd <- apply(do.call(cbind, grid_off), 1, sd, na.rm = TRUE)
@@ -71,7 +71,7 @@ r_mean[cells] <- ifelse(novel, NA, off_mean); r_sd[cells] <- ifelse(novel, NA, o
 writeRaster(c(r_mean, r_sd, r_mask), res(sprintf("offset_ssp%s_%s.tif", CFG$ssp, CFG$period)), overwrite = TRUE,
             names = c("offset_mean", "offset_sd_among_GCMs", "extrapolation_masked"))
 
-# ---- Fig. 4B ---------------------------------------------------------------
+# ---- Fig. 3B ---------------------------------------------------------------
 df <- as.data.frame(c(r_mean, r_mask), xy = TRUE, na.rm = FALSE); names(df)[3:4] <- c("offset", "masked")
 df <- df[!is.na(df$masked), ]
 p <- ggplot() + geom_raster(data = df, aes(x, y, fill = offset)) +
@@ -81,12 +81,12 @@ p <- ggplot() + geom_raster(data = df, aes(x, y, fill = offset)) +
   coord_quickmap(xlim = EV[1:2], ylim = EV[3:4], expand = FALSE) +
   labs(x = "Longitude", y = "Latitude") +
   theme_bw()
-ggsave(fig(sprintf("Fig4B_offset_ssp%s_%s.png", CFG$ssp, CFG$period)), p, width = 8, height = 5.5, dpi = 300)
+ggsave(fig(sprintf("Fig3B_offset_ssp%s_%s.png", CFG$ssp, CFG$period)), p, width = 8, height = 5.5, dpi = 300)
 
 offset_summary <- data.frame(stat = c("grid_min", "grid_median", "grid_max", "grid_mean_sd_among_GCMs"),
   value = c(quantile(off_mean[!novel], c(0, .5, 1), na.rm = TRUE), mean(off_sd[!novel], na.rm = TRUE)))
 write.csv(offset_summary, tab("offset_grid_summary.csv"), row.names = FALSE); print(offset_summary)
-# ---- per-accession offsets (Table S6) and latitude trend ---------------------
+# ---- per-accession offsets (Table S13) and latitude trend ---------------------
 acc <- data.frame(SampleID = meta$SampleID, group = meta$Population.assignment, Latitude = meta$Latitude,
                   offset_mean = rowMeans(do.call(cbind, acc_off)), offset_sd = apply(do.call(cbind, acc_off), 1, sd))
 # within-species offsets (trained on each species only)
@@ -99,7 +99,7 @@ for (s in c("rotundata", "praehensilis")) {
                      K = CFG$K_lfmm_within[[s]], scale = TRUE)$offset })
   acc[[paste0("offset_within_", s)]] <- rowMeans(o)[match(acc$SampleID, ids)]
 }
-write.csv(acc, tab("TableS6_offset_per_accession.csv"), row.names = FALSE)
+write.csv(acc, tab("TableS13_offset_per_accession.csv"), row.names = FALSE)
 print(acc %>% group_by(group) %>% summarise(n = n(), median_offset = median(offset_mean), max_offset = max(offset_mean)))
 print(summary(lm(offset_mean ~ Latitude, data = acc)))   # direction check for "increases northward"
 msg("Grid cells masked as extrapolation:", sum(novel), "of", length(cells))

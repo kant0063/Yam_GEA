@@ -2,7 +2,7 @@
 # 05.5_partial_RDA_relaxed.R                        Analysis Plan: A2 (relaxed set)
 # Runs the partial RDA / variance partitioning of 05 on the relaxed, imputed set.
 # Output: tables/relaxed/Table2_pRDA_summary.csv (read by 19) and the other
-#         Table 2 files, figures/relaxed/Fig4A_*.png.
+#         Table 2 files, figures/relaxed/Fig3A_*.png.
 #
 # v2 - memory: the relaxed master object holds all 1.57 M SNPs (~1-2 GB) plus kinship,
 # and 05 only needs the 7-kb thinned, MAF-filtered SNPs. This script

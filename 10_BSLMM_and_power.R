@@ -1,8 +1,8 @@
 ################################################################################
 # 10_BSLMM_and_power.R                                     Analysis Plan: A7
 # (a) BSLMM in GEMMA (Zhou et al. 2013): PVE, PGE, n_gamma for IC1-3 and key
-#     variables -> Table S11. Needs the GEMMA binary (CFG$gemma_bin).
-# (b) Power simulation on the real genotypes/kinship -> Fig. S18.
+#     variables -> Table S9. Needs the GEMMA binary (CFG$gemma_bin).
+# (b) Power simulation on the real genotypes/kinship -> Fig. S7.
 # New script. BSLMM: 3 chains x 10 M steps per trait; run on a server.
 #
 # v4: power simulation robust to REML failures (see section b).
@@ -11,7 +11,7 @@
 # summary can be rebuilt without rerunning GEMMA or the (slow) power simulation.
 ################################################################################
 RUN_BSLMM <- TRUE    # GEMMA runs are skipped automatically when their .hyp.txt exists
-RUN_POWER <- TRUE    # set FALSE to rebuild Table S11 only
+RUN_POWER <- TRUE    # set FALSE to rebuild Table S9 only
 source("00_config_and_helpers.R"); M <- load_master(); meta <- M$meta; S <- subsets(M)
 msg("Set sizes:", paste(names(S), lengths(S), sep = " = ", collapse = "; "))
 small <- names(S)[lengths(S) < CFG$min_n_within]
@@ -94,8 +94,8 @@ s11 <- H %>% group_by(set, trait) %>%
 # chain agreement: medians per chain should be similar
 chains <- H %>% group_by(set, trait, chain) %>% summarise(pve = median(pve, na.rm = TRUE), pge = median(pge, na.rm = TRUE),
                                                          n_gamma = median(n_gamma, na.rm = TRUE), .groups = "drop")
-write.csv(chains, tab("TableS11b_BSLMM_by_chain.csv"), row.names = FALSE); print(chains)
-write.csv(s11, tab("TableS11_BSLMM.csv"), row.names = FALSE); print(s11)
+write.csv(chains, tab("TableS10_BSLMM_by_chain.csv"), row.names = FALSE); print(chains)
+write.csv(s11, tab("TableS9_BSLMM.csv"), row.names = FALSE); print(s11)
 # Check chain agreement: medians of pve/pge across the three chains should be close for each trait.
 }
 
@@ -138,8 +138,8 @@ for (s in names(S)) {
     msg(s, "PVE", pve, "power", round(mean(det, na.rm = TRUE), 3), if (n_fail) paste("(REML fallbacks:", n_fail, ")") else "")
   }
 }
-pw <- bind_rows(pw); write.csv(pw, tab("FigS18_power.csv"), row.names = FALSE); print(pw)
-ggsave(fig("FigS18_power.png"), ggplot(pw, aes(100 * PVE, power, colour = set)) + geom_line() + geom_point() +
+pw <- bind_rows(pw); write.csv(pw, tab("FigS7_power.csv"), row.names = FALSE); print(pw)
+ggsave(fig("FigS7_power.png"), ggplot(pw, aes(100 * PVE, power, colour = set)) + geom_line() + geom_point() +
   geom_hline(yintercept = .8, linetype = 2) + labs(x = "Variance explained by the locus (%)",
   y = paste0("Detection rate (FDR ", CFG$fdr, ")"), colour = NULL) + theme_bw(), width = 6, height = 4, dpi = 300)
 }

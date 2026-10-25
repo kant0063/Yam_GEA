@@ -1,7 +1,7 @@
 ################################################################################
 # 04_environment_IBD_IBE.R                                 Analysis Plan: A3 + A4
-# Fig. S17 (environmental PCA coloured by genetic group + site map over PC1),
-# Table S8 (isolation by distance vs environment: MMRR + partial Mantel), for the
+# Fig. S4 (environmental PCA coloured by genetic group + site map over PC1),
+# Table S4 (isolation by distance vs environment: MMRR + partial Mantel), for the
 # full panel and within D. rotundata / D. praehensilis.
 #
 # v2 fixes: "subscript out of bounds" came from NA sample IDs returned by
@@ -49,12 +49,12 @@ pB <- ggplot(d3[!bad_xy, ], aes(Longitude, Latitude)) +
   scale_shape_manual(values = shapes[names(shapes) %in% unique(d3$Species_group)]) +
   scale_fill_viridis_c(name = "Env PC1") + coord_quickmap(xlim = xl + c(-1, 1), ylim = yl + c(-1, 1)) +
   labs(x = "Longitude", y = "Latitude", shape = "Group") + theme_bw()
-save_panel(pA, "FigS17A"); save_panel(pB, "FigS17B")   # composite Figure S17 is built by script 17
-ggsave(fig("FigS17A_environmental_PCA.png"), pA, width = 8, height = 6, dpi = 300)
-ggsave(fig("FigS17B_site_map_envPC1.png"), pB, width = 7, height = 5, dpi = 300)
-write.csv(data.frame(PC = 1:5, var_pct = ev[1:5]), tab("FigS17_envPCA_variance.csv"), row.names = FALSE)
+save_panel(pA, "FigS4A"); save_panel(pB, "FigS4B")   # composite Figure S4 is built by script 17
+ggsave(fig("FigS4A_environmental_PCA.png"), pA, width = 8, height = 6, dpi = 300)
+ggsave(fig("FigS4B_site_map_envPC1.png"), pB, width = 7, height = 5, dpi = 300)
+write.csv(data.frame(PC = 1:5, var_pct = ev[1:5]), tab("FigS4_envPCA_variance.csv"), row.names = FALSE)
 write.csv(d3 %>% group_by(Population.assignment) %>% summarise(n = n(), envPC1_mean = mean(PC1), envPC1_min = min(PC1),
-          envPC1_max = max(PC1)), tab("FigS17_envPC1_by_group.csv"), row.names = FALSE)
+          envPC1_max = max(PC1)), tab("FigS4_envPC1_by_group.csv"), row.names = FALSE)
 
 # ---- A4: IBD vs IBE ---------------------------------------------------------
 run_ibe <- function(ids, label) {
@@ -76,4 +76,4 @@ run_ibe <- function(ids, label) {
 }
 S <- subsets(M)
 s8 <- bind_rows(lapply(names(S), function(s) run_ibe(S[[s]], s)))
-write.csv(s8, tab("TableS8_IBD_IBE_MMRR_partialMantel.csv"), row.names = FALSE); print(s8)
+write.csv(s8, tab("TableS4_IBD_IBE_MMRR_partialMantel.csv"), row.names = FALSE); print(s8)

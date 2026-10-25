@@ -6,7 +6,7 @@
 #   - VIF pruning instead of |r| > 0.9 filter computed on a different column set
 #   - environment conditioned on ancestry (PCs) and geography; varpart with adj. R2
 #   - 999 permutations by model, axis and term (original: 100)
-# Outputs: Table 2, Fig. 4A (full + partial RDA), within-species pRDA.
+# Outputs: Table 2, Fig. 3A (full + partial RDA), within-species pRDA.
 # v3: RDA fitted to the full set of genetic PC scores instead of the SNP matrix
 #     (mathematically identical results; avoids 'vector memory limit reached').
 ################################################################################
@@ -60,7 +60,7 @@ write.csv(bind_rows(lapply(out, `[[`, "axis")), tab("Table2_tests_by_axis.csv"),
 write.csv(bind_rows(lapply(out, `[[`, "term")), tab("Table2_tests_by_term.csv"), row.names = TRUE)
 saveRDS(out, res("rda_models.rds")); print(bind_rows(lapply(out, `[[`, "summary")))
 
-# ---- Fig. 4A: full RDA vs partial RDA (environment | ancestry + geography) ----
+# ---- Fig. 3A: full RDA vs partial RDA (environment | ancestry + geography) ----
 plot_rda <- function(mod, title) {
   ve <- round(100 * mod$CCA$eig[1:2] / mod$tot.chi, 1)
   si <- as.data.frame(scores(mod, 1:2, "sites")); si$group <- meta$Population.assignment[match(rownames(si), meta$SampleID)]
@@ -74,7 +74,7 @@ plot_rda <- function(mod, title) {
 }
 p_full <- plot_rda(out$full$full, "A1  Full RDA (environment + geography + ancestry)")
 p_part <- plot_rda(out$full$penv, "A2  Partial RDA: environment | ancestry + geography")
-ggsave(fig("Fig4A_full_RDA.png"), p_full, width = 8, height = 6, dpi = 300)
-ggsave(fig("Fig4A_partial_RDA.png"), p_part, width = 8, height = 6, dpi = 300)
+ggsave(fig("Fig3A_full_RDA.png"), p_full, width = 8, height = 6, dpi = 300)
+ggsave(fig("Fig3A_partial_RDA.png"), p_part, width = 8, height = 6, dpi = 300)
 # NOTE: report axis % consistently (here % of TOTAL variance; the original caption/text mixed
 # "% of constrained variance"). State which one in the caption.

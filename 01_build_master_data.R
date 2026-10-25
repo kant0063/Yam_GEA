@@ -92,6 +92,6 @@ M <- list(G = G, snp = snp, meta = meta, E = E, env_vars = colnames(E),
 saveRDS(M, res("master.rds"))
 write.csv(meta, tab("sample_metadata_aligned.csv"), row.names = FALSE)
 write.csv(data.frame(variable = colnames(E), VIF_retained = colnames(E) %in% vp_all$keep,
-                     bioclim_offset_set = colnames(E) %in% vp_bio$keep), tab("TableS1_VIF_flags.csv"), row.names = FALSE)
+                     bioclim_offset_set = colnames(E) %in% vp_bio$keep), tab("TableS1_environmental_variables_VIF.csv"), row.names = FALSE)
 print(table(meta$Population.assignment, meta$NonAdmixed, dnn = c("group", "non-admixed")))
 msg("Saved", res("master.rds"))

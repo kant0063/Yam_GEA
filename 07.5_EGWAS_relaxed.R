@@ -9,8 +9,8 @@
 #     lambda/counts (per-SNP p-values for 1.57 M SNPs x 39 traits are not saved;
 #     set SAVE_ALL_P <- TRUE to keep them)
 #   - no Manhattan plots
-# Outputs (tables/relaxed/): TableS4_EGWAS_significant_with_effects.csv,
-#   TableS4b_lambda_and_counts.csv, EGWAS_summary_by_set.csv
+# Outputs (tables/relaxed/): TableS18_EGWAS_significant_with_effects.csv,
+#   TableS7_lambda_and_counts.csv, EGWAS_summary_by_set.csv
 # Note: BH-FDR over 1.57 M tests is stricter than over 63 k; 19 therefore compares
 # associated 10-kb windows, not SNP counts.
 # v2: full-rank covariates (via 00), small sets skipped, NA p-values handled.
@@ -76,8 +76,8 @@ hits <- if (nrow(hits)) left_join(hits, M$snp[, c("SNP", "CHROM", "POS")], by = 
              q = numeric(), trait = character(), set = character(), CHROM = character(), POS = numeric())
 hits$beta_original_units <- if (nrow(hits) && !isTRUE(CFG$int_transform)) hits$beta * apply(Y, 2, sd)[hits$trait] else rep(NA_real_, nrow(hits))
 lam <- bind_rows(lam)
-write.csv(hits, tab("TableS4_EGWAS_significant_with_effects.csv"), row.names = FALSE)
-write.csv(lam, tab("TableS4b_lambda_and_counts.csv"), row.names = FALSE)
+write.csv(hits, tab("TableS18_EGWAS_significant_with_effects.csv"), row.names = FALSE)
+write.csv(lam, tab("TableS7_lambda_and_counts.csv"), row.names = FALSE)
 summ <- hits %>% group_by(set) %>% summarise(associations = n(), unique_markers = n_distinct(SNP),
           median_PVE_pct = 100 * median(PVE), .groups = "drop")
 write.csv(summ, tab("EGWAS_summary_by_set.csv"), row.names = FALSE); print(summ)

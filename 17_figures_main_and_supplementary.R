@@ -2,12 +2,14 @@
 # 17_figures_main_and_supplementary.R                      Analysis Plan: A10
 # Redraws every manuscript figure not already written by 02-16 from the revised
 # results, so all figures come from the same data and settings:
-#   Fig. 1A (PCA), Fig. 3, Fig. S15 (redrawn from Table S6), Fig. 4 (A partial RDA, B offset, C-D Köppen-Geiger),
-#   Fig. S4, S5, S6, S7, S8, S9, S11, S13, S16.
-# Figures produced elsewhere: 2A-B (14), 2C (06), S1 (02), S2-S3 (Yam_spatial_population_structure.R),
-#   S10 (07), S12 (15), S14-S15 (13), S17 (04), S18 (10), 4A full/partial singles (05), 4B single (11).
-# Each block is independent: if its inputs are missing it is skipped with a message.
-# Needs: ggplot2; optional patchwork (Fig. 4 composite), igraph (Fig. S6), terra (Fig. 4B-D).
+# Figures drawn here (new numbering, ordered revision of 25 Oct 2026):
+#   Fig. 1 (A PCA + B-C TESS3 panels), Fig. 2 (A FST by pseudomolecule, B-C private alleles, D FROH),
+#   Fig. 3 (A partial RDA, B offset, C-D Koppen-Geiger), Fig. 4 (markers by pseudomolecule),
+#   Figs S1, S2, S3, S4, S5, S6, S9 (A-D), S10, S11, S12, S13, S14, S15, S16, S17, S18.
+# Single panels are also written by: 02 (S1), 04 (S4), 06 (S5, Fig. 2A), 07 (S6), 10 (S7), 13/13b (S9, S9D),
+#   14 (Fig. 2B-D), 15 (S8), Yam_spatial_population_structure_revised.R (Fig. 1B-C, S2-S3 data).
+# Submission files (figures/<set>/submission/Figure1-4.tiff/.pdf) follow the new main-figure order.
+# Needs: ggplot2; optional patchwork (Fig. 3 composite), igraph (Fig. S12), terra (Fig. 3B-D).
 ################################################################################
 source("00_config_and_helpers.R"); M <- load_master(); meta <- M$meta
 # On error, any figure file written in the failed block is removed (ggsave leaves a blank PNG if drawing fails)
@@ -22,7 +24,7 @@ block <- function(name, expr) {
 vtype <- function(v) { k <- as.integer(gsub("\\D", "", v))
   ifelse(grepl("^IC", v), "climate IC", ifelse(grepl("^bio", v, ignore.case = TRUE),
          ifelse(!is.na(k) & k >= 12, "precipitation", "temperature"), "soil")) }
-hits_all <- if (file.exists(tab("TableS4_EGWAS_significant_with_effects.csv"))) read.csv(tab("TableS4_EGWAS_significant_with_effects.csv")) else NULL
+hits_all <- if (file.exists(tab("TableS18_EGWAS_significant_with_effects.csv"))) read.csv(tab("TableS18_EGWAS_significant_with_effects.csv")) else NULL
 hits <- if (!is.null(hits_all)) filter(hits_all, set == "full") else NULL
 Y <- if (file.exists(res("ICs.rds"))) cbind(M$E, readRDS(res("ICs.rds"))) else M$E
 
@@ -33,18 +35,18 @@ block("Fig1A", {
     labs(x = sprintf("PC1 (%.2f%%)", M$pc_var[1]), y = sprintf("PC2 (%.2f%%)", M$pc_var[2]), colour = "Group") + theme_bw()
   ggsave(fig("Fig1A_PCA.png"), p, width = 7, height = 5, dpi = 300) })
 
-# ---------------- Fig. 3: significant markers by chromosome and variable type ----------------
-block("Fig3", {
+# ---------------- Fig. 4: significant markers by chromosome and variable type ----------------
+block("Fig4", {
   d <- hits_all %>% mutate(type = vtype(trait), Mb = POS / 1e6,
          set = factor(set, levels = c("full", "rotundata", "praehensilis"),
                       labels = c("Full panel (Q+K)", "Within D. rotundata", "Within D. praehensilis")))
   p <- ggplot(d, aes(Mb, CHROM, colour = type, shape = type)) + geom_point(size = 2, alpha = .8, position = position_jitter(width = 0, height = .15, seed = 1)) +
     facet_wrap(~set, nrow = 1) + scale_colour_manual(values = c(precipitation = "#2166ac", temperature = "#b2182b", soil = "#1b7837", `climate IC` = "grey30")) +
     labs(x = "Position (Mb)", y = NULL, colour = "Variable type", shape = "Variable type") + theme_bw()
-  p3 <- p; ggsave(fig("Fig3_markers_by_chromosome.png"), p, width = 14, height = 6, dpi = 300, bg = "white") })
+  p3 <- p; ggsave(fig("Fig4_markers_by_chromosome.png"), p, width = 14, height = 6, dpi = 300, bg = "white") })
 
-# ---------------- Fig. 4: A partial RDA, B offset, C-D Köppen ----------------
-block("Fig4", {
+# ---------------- Fig. 3: A partial RDA, B offset, C-D Köppen ----------------
+block("Fig3", {
   need("terra"); out <- readRDS(res("rda_models.rds")); mod <- out$full$penv
   ve <- round(100 * mod$CCA$eig[1:2] / mod$tot.chi, 1)
   si <- as.data.frame(vegan::scores(mod, 1:2, "sites")); si$group <- meta$Population.assignment[match(rownames(si), meta$SampleID)]
@@ -76,24 +78,24 @@ block("Fig4", {
       coord_quickmap(xlim = ex[1:2], ylim = ex[3:4], expand = FALSE) + labs(tag = ttl, x = NULL, y = NULL, fill = "Köppen") + theme_bw() }
   pC <- kplot(CFG$koppen_hist, "C"); pD <- kplot(CFG$koppen_fut, "D")
   if (requireNamespace("patchwork", quietly = TRUE)) {
-    fig4 <- patchwork::wrap_plots(pA, pB, pC, pD, ncol = 2); ggsave(fig("Fig4_composite.png"), fig4, width = 15, height = 11, dpi = 300, bg = "white")
-  } else stop("patchwork is required for the Figure 4 composite") })
+    fig4 <- patchwork::wrap_plots(pA, pB, pC, pD, ncol = 2); ggsave(fig("Fig3_composite.png"), fig4, width = 15, height = 11, dpi = 300, bg = "white")
+  } else stop("patchwork is required for the Figure 3 composite") })
 
-# ---------------- Fig. S4: FST outliers by chromosome ----------------
-block("FigS4", {
-  d <- read.csv(tab("FigS4_outliers_by_chromosome.csv")); d$outlier <- factor(d$outlier, c("95th", "99th", "99.5th"))
+# ---------------- Fig. S5: FST outliers by chromosome ----------------
+block("FigS5", {
+  d <- read.csv(tab("FigS5_outliers_by_chromosome.csv")); d$outlier <- factor(d$outlier, c("95th", "99th", "99.5th"))
   p <- ggplot(d, aes(CHROM, n, fill = outlier)) + geom_col() + scale_fill_manual(values = c("#ffffb2", "#fd8d3c", "#bd0026")) +
     coord_flip() + labs(x = NULL, y = "Outlier SNPs (global WC FST)", fill = "Percentile") + theme_bw()
-  ggsave(fig("FigS4_FST_outliers_by_chromosome.png"), p, width = 6, height = 6, dpi = 300) })
+  ggsave(fig("FigS5_FST_outliers_by_chromosome.png"), p, width = 6, height = 6, dpi = 300) })
 
-# ---------------- Fig. S5 / S6: environmental correlations ----------------
-block("FigS5", {
+# ---------------- Fig. S11 / S6: environmental correlations ----------------
+block("FigS11", {
   R <- cor(M$E); o <- hclust(as.dist(1 - abs(R)))$order
   d <- as.data.frame(as.table(R[o, o]))
   p <- ggplot(d, aes(Var1, Var2, fill = Freq)) + geom_tile() + scale_fill_gradient2(low = "red", mid = "white", high = "blue", limits = c(-1, 1)) +
     labs(x = NULL, y = NULL, fill = "r") + theme_minimal() + theme(axis.text.x = element_text(angle = 90, size = 6), axis.text.y = element_text(size = 6))
-  ggsave(fig("FigS5_env_correlation_matrix.png"), p, width = 8, height = 7, dpi = 300) })
-block("FigS6", {
+  ggsave(fig("FigS11_env_correlation_matrix.png"), p, width = 8, height = 7, dpi = 300) })
+block("FigS12", {
   need("igraph"); R <- cor(M$E); A <- (abs(R) >= .3) * 1; diag(A) <- 0
   g <- igraph::graph_from_adjacency_matrix(A, mode = "undirected"); set.seed(CFG$seed); lay <- igraph::layout_with_fr(g)
   el <- igraph::as_edgelist(g); ed <- data.frame(x = lay[match(el[, 1], colnames(R)), 1], y = lay[match(el[, 1], colnames(R)), 2],
@@ -103,25 +105,25 @@ block("FigS6", {
     scale_colour_gradient2(low = "red", mid = "grey90", high = "darkgreen", limits = c(-1, 1)) +
     geom_point(data = nd, aes(x, y, fill = type), shape = 21, size = 5) + geom_text(data = nd, aes(x, y, label = var), size = 2.2, vjust = -1.4) +
     scale_fill_manual(values = c(precipitation = "#4393c3", temperature = "#d6604d", soil = "#5aae61")) + theme_void() + labs(colour = "r", fill = NULL)
-  ggsave(fig("FigS6_env_correlation_network.png"), p, width = 9, height = 8, dpi = 300, bg = "white") })
+  ggsave(fig("FigS12_env_correlation_network.png"), p, width = 9, height = 8, dpi = 300, bg = "white") })
 
-# ---------------- Fig. S7: EGWAS summary (full panel) ----------------
-block("FigS7", {
+# ---------------- Fig. S13: EGWAS summary (full panel) ----------------
+block("FigS13", {
   a <- hits %>% count(trait) %>% ggplot(aes(reorder(trait, n), n)) + geom_col() + coord_flip() + labs(x = NULL, y = "Significant markers", tag = "A") + theme_bw()
   b <- hits %>% distinct(SNP, CHROM) %>% count(CHROM) %>% ggplot(aes(CHROM, n)) + geom_col() + coord_flip() + labs(x = NULL, y = "Markers", tag = "B") + theme_bw()
   c <- ggplot(hits, aes(-log10(p))) + geom_histogram(bins = 30) + geom_vline(xintercept = median(-log10(hits$p)), colour = "red", linetype = 2) + labs(tag = "C") + theme_bw()
   d <- ggplot(hits, aes(reorder(trait, -log10(p), median), 100 * PVE)) + geom_boxplot() + coord_flip() + labs(x = NULL, y = "PVE (%)", tag = "D") + theme_bw()
-  ggsave(fig("FigS7_EGWAS_summary.png"), patchwork::wrap_plots(a, b, c, d, ncol = 2), width = 12, height = 10, dpi = 300, bg = "white") })
+  ggsave(fig("FigS13_EGWAS_summary.png"), patchwork::wrap_plots(a, b, c, d, ncol = 2), width = 12, height = 10, dpi = 300, bg = "white") })
 
-# ---------------- Fig. S8 / S9 / S11 / S13: pleiotropic markers ----------------
+# ---------------- Fig. S14 / S9 / S11 / S13: pleiotropic markers ----------------
 P <- if (file.exists(res("egwas_pvalues_full.rds"))) readRDS(res("egwas_pvalues_full.rds")) else NULL
 top_multi <- if (!is.null(hits)) hits %>% count(SNP, sort = TRUE) %>% filter(n > 1) else NULL
-block("FigS8", {
+block("FigS14", {
   sn <- head(top_multi$SNP, 30); d <- hits %>% filter(SNP %in% sn)
   p <- ggplot(d, aes(trait, factor(SNP, levels = rev(sn)), fill = -log10(p))) + geom_tile() + scale_fill_viridis_c() +
     labs(x = NULL, y = NULL, fill = "-log10 p") + theme_minimal() + theme(axis.text.x = element_text(angle = 90))
-  ggsave(fig("FigS8_pleiotropic_heatmap.png"), p, width = 9, height = 8, dpi = 300) })
-block("FigS9", {
+  ggsave(fig("FigS14_pleiotropic_heatmap.png"), p, width = 9, height = 8, dpi = 300) })
+block("FigS15", {
   sn <- head(top_multi$SNP, 15); d <- hits %>% filter(SNP %in% sn); vars <- unique(d$trait)
   ang_v <- seq(0, 2 * pi, length = length(vars) + 1)[-1]; ang_s <- seq(0, 2 * pi, length = length(sn) + 1)[-1]
   V <- data.frame(trait = vars, x = 2 * cos(ang_v), y = 2 * sin(ang_v)); S_ <- data.frame(SNP = sn, xs = cos(ang_s), ys = sin(ang_s))
@@ -130,8 +132,8 @@ block("FigS9", {
     geom_point(data = S_, aes(xs, ys, colour = SNP), size = 3) + geom_label(data = V, aes(x, y, label = trait), size = 2.5) +
     geom_text(data = S_, aes(xs * 1.25, ys * 1.25, label = sub("^BDMI0*", "", SNP), colour = SNP), size = 2.6, fontface = "bold") +
     scale_linewidth(range = c(.2, 1.5)) + coord_equal(clip = "off") + theme_void() + guides(colour = "none")
-  ggsave(fig("FigS9_pleiotropy_network.png"), p, width = 8, height = 8, dpi = 300, bg = "white") })
-block("FigS11", {
+  ggsave(fig("FigS15_pleiotropy_network.png"), p, width = 8, height = 8, dpi = 300, bg = "white") })
+block("FigS16", {
   sn <- head(top_multi$SNP, 15)
   d <- hits %>% filter(SNP %in% sn) %>% group_by(SNP) %>% slice_min(p, n = 3) %>% ungroup()
   long <- bind_rows(lapply(seq_len(nrow(d)), function(i) data.frame(SNP = d$SNP[i], trait = d$trait[i],
@@ -140,8 +142,8 @@ block("FigS11", {
   p <- ggplot(long, aes(genotype, value, fill = genotype)) + geom_boxplot(outlier.size = .5) +
     facet_wrap(~ SNP + trait, scales = "free", ncol = 5, labeller = labeller(.multi_line = TRUE)) + scale_fill_manual(values = c("Ref/Ref" = "#4575b4", "Het" = "grey70", "Alt/Alt" = "#d73027")) +
     scale_x_discrete(drop = TRUE) + labs(x = NULL, y = "Environmental value") + theme_bw() + theme(strip.text = element_text(size = 8), axis.text = element_text(size = 7), legend.position = "none")
-  ggsave(fig("FigS11_env_by_genotype_top_markers.png"), p, width = 13, height = 2.6 * ceiling(nrow(d) / 5) + 1, dpi = 300, limitsize = FALSE) })
-block("FigS13", {
+  ggsave(fig("FigS16_env_by_genotype_top_markers.png"), p, width = 13, height = 2.6 * ceiling(nrow(d) / 5) + 1, dpi = 300, limitsize = FALSE) })
+block("FigS17", {
   sn <- intersect(head(top_multi$SNP, 5), colnames(M$G))
   if (!length(sn)) stop("no multi-variable markers found among genotyped SNPs")
   d <- bind_rows(lapply(sn, function(s) data.frame(meta[, c("Longitude", "Latitude", "Population.assignment")], SNP = s,
@@ -151,31 +153,31 @@ block("FigS13", {
     scale_colour_manual(values = c("#4575b4", "grey50", "#d73027")) + facet_wrap(~SNP) +
     coord_quickmap(xlim = range(d$Longitude) + c(-.5, .5), ylim = range(d$Latitude) + c(-.5, .5)) +
     labs(x = "Longitude", y = "Latitude", colour = "Genotype", shape = "Genotype") + theme_bw()
-  ggsave(fig("FigS13_allele_maps_multivariable_markers.png"), p, width = 12, height = 3.6 * ceiling(length(sn) / 3), dpi = 300, bg = "white")
-  write.csv(data.frame(SNP = sn), tab("FigS13_marker_ids.csv"), row.names = FALSE) })   # use these IDs in the caption
+  ggsave(fig("FigS17_allele_maps_multivariable_markers.png"), p, width = 12, height = 3.6 * ceiling(length(sn) / 3), dpi = 300, bg = "white")
+  write.csv(data.frame(SNP = sn), tab("FigS17_marker_ids.csv"), row.names = FALSE) })   # use these IDs in the caption
 
 
-# ---------------- Fig. S15: within-group GEAV heatmap (redrawn from Table S6, no refitting) ----------------
-block("FigS15", {
-  out <- read.csv(tab("TableS6_GEAV_within_group.csv"), check.names = FALSE)
-  cp <- if (file.exists(tab("candidate_parents_within_group.csv"))) read.csv(tab("candidate_parents_within_group.csv"))$SampleID else character(0)
+# ---------------- Fig. S10: within-group GEAV heatmap (redrawn from Table S16, no refitting) ----------------
+block("FigS10", {
+  out <- read.csv(tab("TableS16_GEAV_within_group.csv"), check.names = FALSE)
+  cp <- if (file.exists(tab("TableS17_candidate_parents_within_group.csv"))) read.csv(tab("TableS17_candidate_parents_within_group.csv"))$SampleID else character(0)
   pS15 <- plot_geav_heatmap(out, M, cand_ids = cp)
-  sc <- attr(pS15, "subclusters"); write.csv(sc, tab("TableS6b_GEAV_subclusters.csv"), row.names = FALSE)
+  sc <- attr(pS15, "subclusters"); write.csv(sc, tab("TableS16b_GEAV_subclusters.csv"), row.names = FALSE)
   print(sc %>% filter(!is.na(sep_ratio)) %>% group_by(group) %>% summarise(n = n(), sep_ratio = round(first(sep_ratio), 2),
         sizes = paste(table(cluster), collapse = "/"), .groups = "drop"))
-  ggsave(fig("FigS15_GEAV_within_group.png"), pS15, width = 10, height = 16, dpi = 300, bg = "white")
+  ggsave(fig("FigS10_GEAV_within_group.png"), pS15, width = 10, height = 16, dpi = 300, bg = "white")
 })
 
-# ---------------- Fig. S16: current vs future climate at sampling sites ----------------
-block("FigS16", {
+# ---------------- Fig. S18: current vs future climate at sampling sites ----------------
+block("FigS18", {
   cs <- readRDS(res("climate_at_sites.rds")); now <- cs$now; fut <- cs$fut; colnames(fut) <- colnames(now)
   pc <- prcomp(rbind(now, fut), scale. = TRUE); ve <- round(100 * pc$sdev^2 / sum(pc$sdev^2), 1); n <- nrow(now)
   d <- data.frame(x0 = pc$x[1:n, 1], y0 = pc$x[1:n, 2], x1 = pc$x[n + 1:n, 1], y1 = pc$x[n + 1:n, 2], group = cs$group)
   p <- ggplot(d) + geom_segment(aes(x0, y0, xend = x1, yend = y1, colour = group), arrow = arrow(length = unit(.08, "cm")), alpha = .6) +
     geom_point(aes(x0, y0, colour = group), size = 1) +
     labs(x = paste0("PC1 (", ve[1], "%)"), y = paste0("PC2 (", ve[2], "%)"), colour = NULL) + theme_bw()
-  ggsave(fig("FigS16_climate_shift_at_sites.png"), p, width = 8, height = 6, dpi = 300)
-  write.csv(data.frame(PC = 1:3, var_pct = ve[1:3]), tab("FigS16_PC_variance.csv"), row.names = FALSE) })
+  ggsave(fig("FigS18_climate_shift_at_sites.png"), p, width = 8, height = 6, dpi = 300)
+  write.csv(data.frame(PC = 1:3, var_pct = ve[1:3]), tab("FigS18_PC_variance.csv"), row.names = FALSE) })
 
 # ---------------- Composite supplementary figures (multi-part) ----------------
 # Panels are read from results/<set>/panels/ (saved by scripts 02, 04 and 07) and assembled here.
@@ -225,18 +227,18 @@ block("FigS3 composite", {
       theme(panel.grid.minor = element_blank(), plot.subtitle = element_text(size = 9)))
   f <- patchwork::wrap_plots(maps, ncol = 2) + patchwork::plot_annotation(tag_levels = "A")
   ggsave(fig("FigS3_composite.png"), f, width = 12, height = 13, dpi = 300, bg = "white") })
-block("FigS10 composite", {
+block("FigS6 composite", {
   pf <- res("egwas_pvalues_full.rds")
   rows <- lapply(paste0("IC", 1:3), function(tr) {
     pp <- if (file.exists(pf)) egwas_manhattan_qq(readRDS(pf)[[tr]], M$snp) else
-      list(manhattan = load_panel(paste0("FigS10_", tr, "_manhattan"), "07_EGWAS_revised.R"),
-           qq = load_panel(paste0("FigS10_", tr, "_qq"), "07_EGWAS_revised.R"))
+      list(manhattan = load_panel(paste0("FigS6_", tr, "_manhattan"), "07_EGWAS_revised.R"),
+           qq = load_panel(paste0("FigS6_", tr, "_qq"), "07_EGWAS_revised.R"))
     if (!is.null(pp$lambda)) msg(tr, ": lambda =", round(pp$lambda, 2), "| SNPs at FDR", CFG$fdr, "=", pp$n_sig)
     patchwork::wrap_elements(full = pp$manhattan + pp$qq + patchwork::plot_layout(widths = c(3, 1)))
   })
   f <- patchwork::wrap_plots(rows, ncol = 1) + patchwork::plot_annotation(tag_levels = "A")
-  ggsave(fig("FigS10_composite.png"), f, width = 14, height = 11, dpi = 300, bg = "white") })
-block("FigS13 composite", {
+  ggsave(fig("FigS6_composite.png"), f, width = 14, height = 11, dpi = 300, bg = "white") })
+block("FigS17 composite", {
   sn <- intersect(head(top_multi$SNP, 5), colnames(M$G))
   if (!length(sn)) stop("no multi-variable markers found among genotyped SNPs")
   xl <- range(meta$Longitude, na.rm = TRUE); yl <- range(meta$Latitude, na.rm = TRUE)
@@ -252,21 +254,55 @@ block("FigS13 composite", {
   })
   f <- patchwork::wrap_plots(maps13, nrow = 1) + patchwork::plot_layout(guides = "collect") +
     patchwork::plot_annotation(tag_levels = "A")
-  ggsave(fig("FigS13_composite.png"), f, width = 4.2 * length(sn) + 1.5, height = 3.6, dpi = 300, bg = "white") })
-block("FigS14 composite", {
-  acc <- read.csv(tab("FigS14_prediction_accuracy.csv"))
-  schemes <- c("random 10-fold", "leave-one-group-out", "spatial blocks")
+  ggsave(fig("FigS17_composite.png"), f, width = 4.2 * length(sn) + 1.5, height = 3.6, dpi = 300, bg = "white") })
+block("FigS9 composite", {
+  # A-C: accuracy by variable under the three cross-validation schemes (shared y range, shared legend,
+  #      variable names only under C); D: training on the core vs size-matched sets (from script 13b)
+  acc <- read.csv(tab("FigS9_prediction_accuracy.csv"))
+  sch <- c("random 10-fold" = "Random 10-fold cross-validation", "leave-one-group-out" = "Leave-one-group-out cross-validation",
+           "spatial blocks" = "Spatially blocked cross-validation")
+  mod_lev <- c("baseline", "rrBLUP", "GBLUP_gauss", "GBLUP_exp", "BayesB", "RKHS", "RF")
+  mod_lab <- c(baseline = "Structure-only baseline", rrBLUP = "rrBLUP", GBLUP_gauss = "GBLUP (Gaussian)",
+               GBLUP_exp = "GBLUP (exponential)", BayesB = "BayesB", RKHS = "RKHS", RF = "Random forest")
+  acc$model <- factor(acc$model, levels = intersect(mod_lev, unique(acc$model)))
+  acc$trait <- factor(acc$trait, levels = unique(acc$trait)[order(tolower(unique(acc$trait)))])   # case-insensitive order
   rng <- range(acc$r_pooled, na.rm = TRUE)
-  pl <- lapply(schemes, function(sc) ggplot(acc[acc$scheme == sc, ], aes(trait, r_pooled, colour = model)) +
-    geom_point(position = position_dodge(.6), size = 1.3) + geom_hline(yintercept = 0, linetype = 2) +
-    scale_y_continuous(limits = rng) + labs(x = NULL, y = "Prediction accuracy (r)", colour = "Model", subtitle = sc) +
-    theme_bw() + theme(axis.text.x = element_text(angle = 90, size = 6, vjust = .5, hjust = 1), plot.subtitle = element_text(size = 9)))
-  f <- patchwork::wrap_plots(pl, ncol = 1) + patchwork::plot_layout(guides = "collect") + patchwork::plot_annotation(tag_levels = "A")
-  ggsave(fig("FigS14_composite.png"), f, width = 12, height = 11, dpi = 300, bg = "white") })
-block("FigS17 composite", {
-  a <- load_panel("FigS17A", "04_environment_IBD_IBE.R"); b <- load_panel("FigS17B", "04_environment_IBD_IBE.R")
+  pl <- lapply(seq_along(sch), function(k) {
+    d <- acc[acc$scheme == names(sch)[k], ]
+    ggplot(d, aes(trait, r_pooled, colour = model)) +
+      geom_hline(yintercept = 0, linetype = 2, colour = "grey40") +
+      geom_point(position = position_dodge(.7), size = 1.2) +
+      scale_colour_brewer(palette = "Dark2", labels = mod_lab, drop = FALSE) +
+      scale_y_continuous(limits = rng) +
+      labs(x = NULL, y = "Accuracy (r)", colour = "Model", title = sch[k]) + theme_bw() +
+      theme(plot.title = element_text(size = 10), panel.grid.minor = element_blank(),
+            axis.text.x = if (k == length(sch)) element_text(angle = 90, size = 6.5, vjust = .5, hjust = 1) else element_blank(),
+            axis.ticks.x = if (k == length(sch)) element_line() else element_blank())
+  })
+  f14b <- tab("FigS9D_core_vs_random_training.csv")
+  if (file.exists(f14b)) {
+    cb <- read.csv(f14b); cb <- cb[cb$model != "baseline", ]
+    lab_tr <- c(core = "Core", random_matched = "Random\n(size-matched)", stratified_matched = "Group-stratified\n(size-matched)")
+    cb$training <- factor(cb$training, levels = names(lab_tr), labels = lab_tr)
+    cb$model <- factor(cb$model, levels = intersect(mod_lev, unique(cb$model)), labels = mod_lab[intersect(mod_lev, unique(cb$model))])
+    pD <- ggplot(cb, aes(training, r_pooled, fill = training)) + geom_hline(yintercept = 0, linetype = 2, colour = "grey40") +
+      geom_boxplot(outlier.size = .7, width = .65) + facet_wrap(~model, nrow = 1) +
+      scale_fill_manual(values = c("#e78ac3", "#66c2a5", "#8da0cb"), guide = "none") +
+      labs(x = NULL, y = "Accuracy on non-training accessions (r)", title = "Training on the 50-accession core vs size-matched training sets") +
+      theme_bw() + theme(plot.title = element_text(size = 10), axis.text.x = element_text(size = 7.5), panel.grid.minor = element_blank())
+    f <- (pl[[1]] / pl[[2]] / pl[[3]] + patchwork::plot_layout(guides = "collect")) / pD +
+      patchwork::plot_layout(heights = c(1, 1, 1.25, 1.1)) + patchwork::plot_annotation(tag_levels = "A")
+    h <- 15
+  } else {
+    msg("FigS9D_core_vs_random_training.csv not found (run 13b) - Figure S9 drawn without panel D")
+    f <- patchwork::wrap_plots(pl, ncol = 1) + patchwork::plot_layout(guides = "collect", heights = c(1, 1, 1.25)) +
+      patchwork::plot_annotation(tag_levels = "A"); h <- 11
+  }
+  ggsave(fig("FigS9_composite.png"), f, width = 12, height = h, dpi = 300, bg = "white") })
+block("FigS4 composite", {
+  a <- load_panel("FigS4A", "04_environment_IBD_IBE.R"); b <- load_panel("FigS4B", "04_environment_IBD_IBE.R")
   f <- (a | b) + patchwork::plot_annotation(tag_levels = "A")
-  ggsave(fig("FigS17_composite.png"), f, width = 15, height = 6, dpi = 300, bg = "white") })
+  ggsave(fig("FigS4_composite.png"), f, width = 15, height = 6, dpi = 300, bg = "white") })
 
 # ---------------- Main figures for submission: separate high-resolution files ----------------
 # Writes Figure1.tiff ... Figure4.tiff (600 dpi, LZW) and matching PDFs to figures/<set>/submission/.
@@ -299,12 +335,14 @@ block("Main figures", {
   ggsave(fig("Fig1_composite.png"), f1, width = w1, height = h1, dpi = 300, bg = "white")
   save_main(f1, "Figure1", w1, h1)
   # Figure 2 composite (A FST by pseudomolecule, B rarefied and C raw private alleles, D FROH) from saved tables
+  tryCatch({
   f2 <- fig2_composite(read.csv(res("fst_per_locus_WC.csv")), read.csv(tab("Fig2A_private_alleles_by_group.csv")),
                        read.csv(tab("Fig2B_froh_by_individual.csv")))
   ggsave(fig("Fig2_composite.png"), f2, width = 11, height = 7.5, dpi = 300, bg = "white")
   save_main(f2, "Figure2", 11, 7.5)
-  # Figure 3 and Figure 4: the PNG versions drawn above are re-saved at 600 dpi if their plot objects exist
-  for (fx in list(list("p3", "Figure3", 10, 5.5), list("fig4", "Figure4", 10, 7.5)))
+  }, error = function(e) msg("SKIPPED Figure2 -", conditionMessage(e), "(needs 06 and 14 outputs)"))
+  # Figure 4 and Figure 3: the PNG versions drawn above are re-saved at 600 dpi if their plot objects exist
+  for (fx in list(list("p3", "Figure4", 10, 5.5), list("fig4", "Figure3", 10, 7.5)))
     if (exists(fx[[1]])) tryCatch(save_main(get(fx[[1]]), fx[[2]], fx[[3]], fx[[4]]),
                                   error = function(e) msg("SKIPPED", fx[[2]], "-", conditionMessage(e)))
   msg("Submission figures written to", sub_dir)

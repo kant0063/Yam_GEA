@@ -2,14 +2,14 @@
 # 13b_core_comparison.R                                    Analysis Plan: A9 (core)
 # Compares candidate 50-accession cores as training sets and keeps the one with the
 # highest prediction accuracy (reported in the manuscript):
-#   - "original": the Table S3 core (CFG$core_csv; a title line above the header is handled)
+#   - "original": the Table S14 core (CFG$core_csv; a title line above the header is handled)
 #   - "genotype_only": a core re-selected from genotypes only with Core Hunter
 #     (needs the corehunter R package + Java; skipped if unavailable)
 # Each core is benchmarked as in script 13: train on the core, predict the non-core
 # accessions, compared with random and group-stratified training sets of the same size.
 # Reuses the model set-up of script 13 (no need to rerun 13).
-# Outputs: TableS3b_core_comparison.csv, TableS3_core_collection.csv (best core),
-#          FigS14b_core_vs_random_training.csv/.png (best core).
+# Outputs: TableS15_core_comparison.csv, TableS14_core_collection_selected.csv (best core),
+#          FigS9D_core_vs_random_training.csv/.png (best core).
 ################################################################################
 src <- readLines("13_genomic_prediction_revised.R")
 a <- grep('^source\\("00_config_and_helpers.R"\\)', src)[1]; b <- grep("^run_cv <- function", src)[1] - 1
@@ -69,22 +69,22 @@ cmp <- bind_rows(res_all) %>% filter(training == "core", model != "baseline") %>
   arrange(desc(mean_r))
 best <- cmp$core[1]
 cmp$selected <- cmp$core == best
-# Table S3b: summary of every core (composition + accuracy by training design and model)
+# Table S15: summary of every core (composition + accuracy by training design and model)
 comp <- sapply(names(cores), function(k) paste(names(table(grp[match(cores[[k]], ids)])), table(grp[match(cores[[k]], ids)]), collapse = "; "))
 s3b <- bind_rows(res_all) %>% group_by(core, training, model) %>%
   summarise(n_train = first(n_train), r = mean(r_pooled, na.rm = TRUE), r_within = mean(r_within_group, na.rm = TRUE),
             gain_over_baseline = mean(gain_over_baseline, na.rm = TRUE), .groups = "drop") %>%
   mutate(composition = comp[core], selected = core == best)
-write.csv(cmp, tab("TableS3b_core_comparison.csv"), row.names = FALSE)
-write.csv(s3b, tab("TableS3b_core_comparison_detail.csv"), row.names = FALSE)
+write.csv(cmp, tab("TableS15_core_comparison.csv"), row.names = FALSE)
+write.csv(s3b, tab("TableS15_core_comparison_detail.csv"), row.names = FALSE)
 for (k in names(cores)) write.csv(meta[match(cores[[k]], meta$SampleID), c("SampleID", "Population.assignment", "Longitude", "Latitude")],
-                                  tab(paste0("TableS3c_core_", k, ".csv")), row.names = FALSE)
+                                  tab(paste0("TableS14_core_", k, ".csv")), row.names = FALSE)
 msg("Core with the highest prediction accuracy:", best); print(cmp)
 
 ca <- res_all[[best]]
-write.csv(ca, tab("FigS14b_core_vs_random_training.csv"), row.names = FALSE)
+write.csv(ca, tab("FigS9D_core_vs_random_training.csv"), row.names = FALSE)
 write.csv(meta[match(cores[[best]], meta$SampleID), c("SampleID", "Population.assignment", "Longitude", "Latitude")],
-          tab("TableS3_core_collection.csv"), row.names = FALSE)
+          tab("TableS14_core_collection_selected.csv"), row.names = FALSE)
 print(ca %>% group_by(training, model) %>% summarise(r = round(mean(r_pooled), 2), r_within = round(mean(r_within_group, na.rm = TRUE), 2),
                                                     gain = round(mean(gain_over_baseline), 2), .groups = "drop"), n = Inf)
 z <- ca %>% filter(training %in% c("core", "random_matched")) %>% dplyr::select(trait, model, training, r_pooled, r_pooled_sd) %>%
@@ -98,4 +98,4 @@ p <- ggplot(filter(ca, model != "baseline"), aes(training, r_pooled, fill = trai
   labs(x = NULL, y = "Accuracy on non-training accessions (r)",
        title = NULL) +
   theme_bw() + theme(legend.position = "none", axis.text.x = element_text(size = 8))
-ggsave(fig("FigS14b_core_vs_random_training.png"), p, width = 9, height = 4.5, dpi = 300, bg = "white")
+ggsave(fig("FigS9D_core_vs_random_training.png"), p, width = 9, height = 4.5, dpi = 300, bg = "white")

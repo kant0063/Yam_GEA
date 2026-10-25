@@ -17,11 +17,11 @@ sites <- meta %>% distinct(SiteID, .keep_all = TRUE)
 tr <- sites %>% count(KG_1991_2020, KG_2071_2099, name = "n_sites") %>% mutate(changed = KG_1991_2020 != KG_2071_2099)
 write.csv(tr, tab("Koppen_transitions_sites.csv"), row.names = FALSE); print(tr)
 msg("Sites changing class:", sum(sites$KG_1991_2020 != sites$KG_2071_2099), "of", nrow(sites))
-f_off <- tab("TableS6_offset_per_accession.csv")
+f_off <- tab("TableS13_offset_per_accession.csv")
 if (file.exists(f_off)) {
   off <- read.csv(f_off) %>% left_join(meta[, c("SampleID", "KG_1991_2020", "KG_2071_2099")], by = "SampleID") %>%
     mutate(changed = KG_1991_2020 != KG_2071_2099)
   print(off %>% group_by(changed) %>% summarise(n = n(), median_offset = median(offset_mean)))
   if (length(unique(off$changed)) == 2) print(wilcox.test(offset_mean ~ changed, data = off))
-  write.csv(off, tab("TableS6_offset_with_Koppen.csv"), row.names = FALSE)
+  write.csv(off, tab("TableS13b_offset_with_Koppen.csv"), row.names = FALSE)
 }

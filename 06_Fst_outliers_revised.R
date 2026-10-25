@@ -9,7 +9,7 @@
 # This script computes per-locus Weir & Cockerham (1984) FST directly and makes
 # the contrast explicit: (1) global across the 7 genetic groups (what Fig. 2C
 # showed), (2) pairwise among the four non-admixed groups.
-# Outputs: Fig. 2C (revised), Fig. S4 (revised), outlier tables.
+# Outputs: Fig. 2C (revised), Fig. S5 (revised), outlier tables.
 ################################################################################
 source("00_config_and_helpers.R"); M <- load_master(); meta <- M$meta; G <- M$G
 
@@ -34,7 +34,7 @@ q <- quantile(fst$FST_global, c(.95, .99, .995), na.rm = TRUE)
 fst$outlier <- cut(fst$FST_global, c(-Inf, q, Inf), labels = c("none", "95th", "99th", "99.5th"))
 write.csv(fst, res("fst_per_locus_WC.csv"), row.names = FALSE)
 write.csv(fst %>% filter(outlier != "none"), tab("FST_outliers_global.csv"), row.names = FALSE)
-write.csv(fst %>% filter(outlier != "none") %>% count(CHROM, outlier), tab("FigS4_outliers_by_chromosome.csv"), row.names = FALSE)
+write.csv(fst %>% filter(outlier != "none") %>% count(CHROM, outlier), tab("FigS5_outliers_by_chromosome.csv"), row.names = FALSE)
 msg("Outliers with private alleles:", sum(fst$outlier != "none" & !is.na(fst$private_in), na.rm = TRUE),
     "of", sum(fst$outlier != "none", na.rm = TRUE))
 

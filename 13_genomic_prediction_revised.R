@@ -11,13 +11,13 @@
 #     random-CV accuracy and rankings mostly reproduce species/region (circularity).
 # v3: the core is used again as a training set (core -> rest, as in the EGS framework),
 #     benchmarked against random and group-stratified training sets of the same size,
-#     with the structure-only baseline; Table S3 built from genotypes only if no core file.
+#     with the structure-only baseline; Table S14 built from genotypes only if no core file.
 # v2: mixed.solve beta is a 1x1 matrix -> coerced (fixes 'non-conformable arrays');
 #     drop = FALSE for single-accession folds; prediction length checked.
 # This script: all 167 accessions; random k-fold, leave-one-group-out and spatially
 # blocked CV; structure-only baseline; rrBLUP, GBLUP-Gaussian, GBLUP-exponential,
 # BayesB, RKHS, random forest (+ optional GenoBridge hook); within-group GEAVs.
-# Outputs: Fig. S14, Fig. S15, Table S6 (GEAV columns), candidate parents.
+# Outputs: Fig. S9, Fig. S10, Table S16 (GEAV columns), candidate parents.
 ################################################################################
 source("00_config_and_helpers.R"); need(c("rrBLUP", "BGLR", "ranger")); M <- load_master(); meta <- M$meta
 IC <- readRDS(res("ICs.rds")); Y <- scale(cbind(M$E, IC)); ids <- rownames(Y)
@@ -86,17 +86,17 @@ for (trait in colnames(Y)) {
 acc <- bind_rows(res_acc)
 base <- acc %>% filter(model == "baseline") %>% dplyr::select(trait, scheme, r_base = r_pooled)
 acc <- acc %>% left_join(base, by = c("trait", "scheme")) %>% mutate(gain_over_baseline = r_pooled - r_base)
-write.csv(acc, tab("FigS14_prediction_accuracy.csv"), row.names = FALSE)
+write.csv(acc, tab("FigS9_prediction_accuracy.csv"), row.names = FALSE)
 print(acc %>% group_by(scheme, model) %>% summarise(r = mean(r_pooled), gain = mean(gain_over_baseline), .groups = "drop"))
 
 acc$scheme <- factor(acc$scheme, levels = c("random 10-fold", "leave-one-group-out", "spatial blocks"))
 pS14 <- ggplot(acc, aes(trait, r_pooled, colour = model)) + geom_point(position = position_dodge(.6), size = 1.3) +
   facet_wrap(~scheme, ncol = 1) + geom_hline(yintercept = 0, linetype = 2) +
   labs(x = NULL, y = "Prediction accuracy (r)") + theme_bw() + theme(axis.text.x = element_text(angle = 90, size = 6))
-ggsave(fig("FigS14_prediction_accuracy.png"), pS14, width = 12, height = 9, dpi = 300)
+ggsave(fig("FigS9_prediction_accuracy.png"), pS14, width = 12, height = 9, dpi = 300)
 
 # ---- Core collection: see 13b_core_comparison.R -------------------------------------
-# The core-training analysis (Table S3, Table S3b, Fig. S14b) is run ONLY by script 13b, which
+# The core-training analysis (Table S14, Table S15, Fig. S9D) is run ONLY by script 13b, which
 # compares the original and genotype-based cores and keeps the more accurate one. It is not
 # repeated here, so rerunning 13 can no longer overwrite the 13b outputs.
 
@@ -108,14 +108,14 @@ geav <- sapply(colnames(Y), function(t) oof[[paste(t, best$model[best$trait == t
 rownames(geav) <- ids
 geav_within <- apply(geav, 2, function(v) v - ave(v, grp))
 out <- data.frame(SampleID = ids, group = grp, geav_within, check.names = FALSE)
-write.csv(out, tab("TableS6_GEAV_within_group.csv"), row.names = FALSE)
+write.csv(out, tab("TableS16_GEAV_within_group.csv"), row.names = FALSE)
 v_ph <- find_var(colnames(Y), VAR_PH); v_pr <- find_var(colnames(Y), VAR_PRECIP)
 cand <- list(low_pH = out %>% arrange(.data[[v_ph]]) %>% head(5) %>% dplyr::select(SampleID, group, value = all_of(v_ph)),
              high_BIO12 = out %>% arrange(desc(.data[[v_pr]])) %>% head(5) %>% dplyr::select(SampleID, group, value = all_of(v_pr)))
-print(cand); write.csv(bind_rows(cand, .id = "target"), tab("candidate_parents_within_group.csv"), row.names = FALSE)
+print(cand); write.csv(bind_rows(cand, .id = "target"), tab("TableS17_candidate_parents_within_group.csv"), row.names = FALSE)
 # compare with the original picks: P4937, P4936, P4919, P4921, P4920 (low pH); A3009, A5059, A5061, P599, P424 (BIO12)
 
 pS15 <- plot_geav_heatmap(out, M, cand_ids = unique(unlist(lapply(cand, function(x) x$SampleID))))
-write.csv(attr(pS15, "subclusters"), tab("TableS6b_GEAV_subclusters.csv"), row.names = FALSE)
-ggsave(fig("FigS15_GEAV_within_group.png"), pS15, width = 10, height = 16, dpi = 300, bg = "white")
+write.csv(attr(pS15, "subclusters"), tab("TableS16b_GEAV_subclusters.csv"), row.names = FALSE)
+ggsave(fig("FigS10_GEAV_within_group.png"), pS15, width = 10, height = 16, dpi = 300, bg = "white")
 
